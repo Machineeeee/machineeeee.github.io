@@ -1,6 +1,6 @@
 body > p:first-child {color: red;}
-p.a[tabindex="-1"]:hover {color: red;}
 p.a[tabindex]:focus {color: blue;}
+p.a[tabindex="-1"]:hover {color: red;}
 p.a[tabindex]:active {color: green;}
 body > p > span:first-child {color: red;}
 body > p > span > span:first-child {color: green;}
