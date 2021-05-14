@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    main {
+      width: 400px;
+      border: 3px solid burlywood;
+      margin: auto;
+    }
+
+    section {
+      padding: 10px;
+      background-color: rgb(204,204,204);
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    div {
+      height: 400px;
+      border-top: solid 3px burlywood;
+      background-repeat: no-repeat;
+    }
+
+    .p1 {
+      background-image: url(https://img.zcool.cn/community/01a5d557f52cb1a84a0d304ff18182.jpg@1280w_1l_2o_100sh.jpg);
+      background-size: contain;
+      background-position: center;
+    }
+
+    .p2 {
+      background-image: url(https://tse1-mm.cn.bing.net/th/id/OIP.muSkxPDzh73Zq3KX_luJUQHaEK?pid=ImgDet&rs=1);
+      background-size: contain;
+      background-position: center;
+    }
+    .p3 {
+      background-image: url(https://tse3-mm.cn.bing.net/th/id/OIP.2U7R9bh6MEwrFlzyIhoP5wHaJ4?pid=ImgDet&rs=1);
+      background-size: 200px;
+      background-position: center;
+    }
+
+    .p4 {
+      background-image: url(https://img.zcool.cn/community/01f2125dce4dfca8012129e2c207d1.jpg@1280w_1l_2o_100sh.jpg);
+      background-size: cover;
+    }
+    .p5 img {
+      width: 400px; 
+      height: 400px;
+      object-fit: cover ;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section>较高图片水平居中</section>
+    <div class="p1"></div>
+    <section>较宽图片垂直居中</section>
+    <div class="p2"></div>
+    <section>较小图片居于正中</section>
+    <div class="p3"></div>
+    <section>background-size:cover </section>
+    <div class="p4"></div>
+    <section>object-fit:cover</section>
+    <div class="p5">
+      <img src="https://img.zcool.cn/community/01f2125dce4dfca8012129e2c207d1.jpg@1280w_1l_2o_100sh.jpg" alt="">
+    </div>
+  </main>
+</body>
+</html>
