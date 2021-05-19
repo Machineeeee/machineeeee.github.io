@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)file:///C:/Users/Administrator/Desktop/bootstrap-table.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    main {
+      width: 500px;
+      margin: auto;
+      background-color: rgb(248,241,235);
+      border: solid 1px rgb(241,243,244);
+    }
+
+    section[class^="grid-"] {
+      width: 230px;
+      height: 230px;
+      margin: 20px auto;
+      background-color: white;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: normal;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    div {
+      width: 70px;
+      height: 70px;
+      text-align: center;
+      line-height: 70px;
+    }
+
+    div.grid-float {
+      border: 5px solid rgb(0,0,240);
+      float: left;
+    }
+
+    div.grid-float:not(:nth-child(3n+1)) {
+      margin-left: -5px;
+    }
+
+    div.grid-float:nth-child(n+4) {
+      margin-top: -5px;
+    }
+
+    div.grid-float:hover {
+      border-color: red;
+      position: relative;
+    }
+
+    section.grid-position {
+      position: relative;
+    }
+
+    div.position {
+      border: 5px solid rgb(240,0,0);
+      position: absolute;
+    }
+
+    div.position:nth-child(3n+2) {
+      left: 75px;
+    }
+
+    div.position:nth-child(3n+3) {
+      left: 150px;
+    }
+
+    div.position:nth-child(n+4) {
+      top: 75px;
+    }
+
+    div.position:nth-child(n+7) {
+      top: 150px;
+    }
+
+    div.position:hover {
+      border: 5px solid rgb(0, 0, 240);
+      z-index: 99;
+    }
+
+    div.inline-block {
+      margin: 0 0;
+      border: 5px solid rgb(240, 240, 0);
+      display: inline-block;
+    }
+
+    div.inline-block:not(:nth-child(3n+1)) {
+      margin-left: -5px;
+    }
+
+    div.inline-block:nth-child(n+4) {
+      margin-top: -5px;
+    }
+
+    div.inline-block:hover {
+      border-color: rgb(0, 240, 0);
+      position: relative;
+    }
+
+    td {
+      width: 70px;
+      height: 70px;
+      text-align: center;
+      line-height: 70px;
+    }
+
+    tr,col {
+      border: 5px solid rgb(0, 240, 240);
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: auto;
+    }
+
+    td:hover {
+      border: 5px solid pink;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>浮动</h1>
+    <section class="grid-float">
+      <div class="grid-float">1</div>
+      <div class="grid-float">2</div>
+      <div class="grid-float">3</div>
+      <div class="grid-float">4</div>
+      <div class="grid-float">5</div>
+      <div class="grid-float">6</div>
+      <div class="grid-float">7</div>
+      <div class="grid-float">8</div>
+      <div class="grid-float">9</div>
+    </section>
+    <h1>定位</h1>
+    <section class="grid-position">
+      <div class="position">1</div>
+      <div class="position">2</div>
+      <div class="position">3</div>
+      <div class="position">4</div>
+      <div class="position">5</div>
+      <div class="position">6</div>
+      <div class="position">7</div>
+      <div class="position">8</div>
+      <div class="position">9</div>
+    </section>
+    <h1>行内块元素</h1>
+    <section class="grid-">
+      <div class="inline-block">1</div><div class="inline-block">2</div><div class="inline-block">3</div><div class="inline-block">4</div><div class="inline-block">5</div><div class="inline-block">6</div><div class="inline-block">7</div><div class="inline-block">8</div><div class="inline-block">9</div>
+    </section>
+    <h1>表格</h1>
+    <section class="grid-table">
+      <table>
+        <colgroup><col>
+        <col>
+        </colgroup><tbody><tr>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>8</td>
+          <td>9</td>
+        </tr>
+      </tbody></table>
+    </section>
+  </main>
+
+</body></html>
