@@ -16,15 +16,15 @@
   content: '\E60C';
 }
 
-.icon-mi-2::before {
+.icon-mi-2::before{
   content: '\E615';
 }
 
-.icon-mi-3::before {
+.icon-mi-3::before{
   content: '\E634';
 }
 
-.icon-mi-4::before {
+.icon-mi-4::before{
   content: '\E635';
 }
 
@@ -49,7 +49,7 @@
 }
 
 .icon-mi-10::before {
-  content: '\E601';
+  content: '\E63C';
 }
 
 .icon-mi-11::before {
