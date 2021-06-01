@@ -1,3 +1,4 @@
+/* 卡片块模板统一样式 */
 div[class*="-card-container"] {
   width: 1226px;
   height: 686px;
@@ -26,14 +27,21 @@ div.container-bottom-left {
   height: 614px;
   transition: all .2s linear;
 }
-
+/* 手机卡片块左侧长块 */
 .phone-card-container div.container-bottom-left:hover {
   transition: all .2s linear;
   transform: translate3d(0,-2px,0);
   box-shadow: 0 15px 30px rgba(0,0,0,.1);
 }
 
-.phone-card-container > .card-container-bottom > a {
+/* 手机卡片块左侧长图 */
+.phone-card-container div.container-bottom-left > a > img {
+  width: 234px;
+  height: 614px;
+}
+
+/* 手机卡片块右上角查看更多 */
+a.more {
   position: absolute;
   right: 0;
   top: -58px;
@@ -43,8 +51,8 @@ div.container-bottom-left {
   color: #424242;
   transition: all .4s;
 }
-
- i.phone-card-i {
+/* 手机卡片块右上角图标 > */
+ a.more > i.icon {
   height: 12px;
   padding: 4px;
   margin-left: 8px;
@@ -55,30 +63,18 @@ div.container-bottom-left {
   color: #fff;
   transition: all .4s;
 }
-
-.phone-card-container > .card-container-bottom > a:hover {
+/* 手机卡片块右上角查看更多:hover 样式 */
+a.more:hover {
   color: #ff6709;
   transition: all .4s;
 }
 
-.phone-card-container > .card-container-bottom > a:hover > i {
+a.more:hover > i {
   background-color: #ff6709;
   transition: all .4s;
 }
 
-div.container-bottom-left > a > img {
-  width: 234px;
-  height: 614px;
-}
-
-ul.container-bottom-right {
-  display: flex;
-  flex-flow: row wrap;
-  position: absolute;
-  left: 234px;
-  top: 0;
-}
-
+/* 手机板块购物卡片样式 */
 .phone-card-container  ul.container-bottom-right > li {
   position: relative;
   margin-left: 14px;
@@ -90,6 +86,23 @@ ul.container-bottom-right {
   transition: all .2s linear;
 }
 
+.phone-card-container ul.container-bottom-right {
+  left: 234px;
+  top: 0;
+}
+
+/* 购物卡片包含块右侧统一样式 */
+ul.container-bottom-right {
+  display: flex;
+  width: 992px;
+  flex-flow: row wrap;
+  position: absolute;
+  right: 0;
+  top: 42px;
+  visibility: visible;
+  transition: visibility 0s 999s;
+}
+/* 正常大小购物卡片统一样式 */
 ul.container-bottom-right > li:not(:last-child) {
   position: relative;
   margin-left: 14px;
@@ -100,26 +113,21 @@ ul.container-bottom-right > li:not(:last-child) {
   background-color: #fff;
   transition: all .2s linear;
 }
-
-.phone-card-container  ul.container-bottom-right > li:hover{
-  transition: all .2s linear;
-  transform: translate3d(0,-2px,0);
-  box-shadow: 0 15px 30px rgba(0,0,0,.1);
-}
-
-
-
+/* 正常大小购物卡片:hover样式 */
 ul.container-bottom-right > li:not(:last-child):hover{
   transition: all .2s linear;
   transform: translate3d(0,-2px,0);
   box-shadow: 0 15px 30px rgba(0,0,0,.1);
 }
 
-div.phone-card-container > ul.container-bottom-right > li:last-child:hover {
+/* 手机板块购物卡片:hover样式 */
+
+div.phone-card-container ul.container-bottom-right > li:last-child:hover {
   transition: all .2s linear;
   transform: translate3d(0,-2px,0);
   box-shadow: 0 15px 30px rgba(0,0,0,.1);
-}
+} 
+
 
 ul.container-bottom-right > li > a > img {
   width: 160px;
@@ -164,7 +172,7 @@ p.card-price > span.past{
 }
 
 
-/* 小商品卡 */
+/* 小商品卡样式*/
 
 div.small-card{
   width: 234px;
@@ -240,6 +248,7 @@ div.more-right {
   margin-top: -45px;
 }
 
+/* 通用的左侧两张图片样式 */
 .container-bottom-left > div > a > img {
   width: 234px;
   height: 300px;
@@ -249,6 +258,7 @@ div.more-right {
   width: 234px;
   height: 300px;
   margin-bottom: 14px;
+  transition: all .2s linear;
 }
 
 .container-bottom-left > div:hover {
@@ -256,3 +266,183 @@ div.more-right {
   transform: translate3d(0,-2px,0);
   box-shadow: 0 15px 30px rgba(0,0,0,.1);
 }
+
+#card-container {
+  position: absolute;
+  height: 0;
+  top: -42px;
+  right: 0;
+}
+
+#card-container:hover ul {
+  visibility: hidden;
+  transition: none;
+}
+
+#card-container:hover section {
+  color: #333;
+  border-bottom: 2px solid transparent;
+  transition: none;
+}
+
+#card-container > section{
+  margin-left: 30px;
+  height: 24px;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+section.part-1 {
+  color: #ff6700;
+  border-bottom: 2px solid #ff6700;
+  transition: 0s 999s;
+}
+
+section.part-2 {
+  color: #333;
+  border-bottom: 2px solid transparent;
+  transition: 0s 999s;
+}
+
+section.part-3 {
+  color: #333;
+  border-bottom: 2px solid transparent;
+  transition: 0s 999s;
+}
+
+#card-container > section.part-1:hover {
+  color: #ff6700;
+  border-bottom-color:#ff6700;
+  transition:none;
+}
+
+#card-container > section.part-2:hover {
+  color: #ff6700;
+  border-bottom-color:#ff6700;
+  transition:none;
+}
+
+#card-container > section.part-3:hover {
+  color: #ff6700;
+  border-bottom-color:#ff6700;
+  transition:none;
+}
+
+#card-container > section.part-1:hover > ul {
+  visibility: visible;
+  transition: none;
+}
+
+#card-container > section.part-2:hover > ul {
+  visibility: visible;
+  transition: none;
+}
+
+#card-container > section.part-3:hover > ul {
+  visibility: visible;
+  transition: none;
+}
+
+ul.card-p1 {
+  z-index: 999;
+}
+
+/* 底部视频栏 */
+
+div.video-container {
+  width: 1226px;
+  height: 357px;
+  margin:0 auto 8px;
+}
+
+.video-top {
+  width: 1226px;
+  height: 57.6px;
+  margin: auto;
+  font-size: 22px;
+  font-weight: 200;
+  line-height: 58px;
+  color: #333;
+}
+
+ul.video-bottom {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  flex-flow: row nowrap;
+}
+
+ul.video-bottom > li {
+  width: 296px;
+  height: 285px;
+  margin-bottom: 14px;
+  background-color: #fff;
+  position: relative;
+  transition: all .2s linear;
+}
+
+ul.video-bottom img {
+  width: 296px;
+  height: 180px;
+  margin-bottom: 28px;
+}
+
+ul.video-bottom h3 {
+  width: 268px;
+  margin: 0 14px 6px;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  color: #333;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+ul.video-bottom p {
+  width: 268px;
+  margin: auto;
+  font-size: 12px;
+  color: #b0b0b0;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+ul.video-bottom > li i {
+  display: block;
+  position: absolute;
+  left: 20px;
+  bottom: 117px;
+  width: 32px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  font-size: 30px;
+  border: 2px solid #fff;
+  border-radius: 12px;
+  background-color: rgba(0,0,0,.6);
+  color: #fff;
+  transition: all .2s;
+  overflow: hidden;
+}
+
+ul.video-bottom img:hover+i {
+  background-color: #ff6709;
+  border-color: #ff6709;
+}
+
+ul.video-bottom > li:hover {
+  transition: all .2s linear;
+  transform: translate3d(0,-2px,0);
+  box-shadow: 0 15px 30px rgba(0,0,0,.1);
+}
+
+
+
+
+
+
+
