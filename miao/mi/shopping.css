@@ -1,8 +1,9 @@
 /* 卡片块模板统一样式 */
+
 div[class*="-card-container"] {
   width: 1226px;
   height: 686px;
-  margin:0 auto 8px;
+  margin: 0 auto 8px;
 }
 
 .card-container-top {
@@ -27,20 +28,24 @@ div.container-bottom-left {
   height: 614px;
   transition: all .2s linear;
 }
+
 /* 手机卡片块左侧长块 */
+
 .phone-card-container div.container-bottom-left:hover {
   transition: all .2s linear;
-  transform: translate3d(0,-2px,0);
-  box-shadow: 0 15px 30px rgba(0,0,0,.1);
+  transform: translate3d(0, -2px, 0);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
 }
 
 /* 手机卡片块左侧长图 */
-.phone-card-container div.container-bottom-left > a > img {
+
+.phone-card-container div.container-bottom-left>a>img {
   width: 234px;
   height: 614px;
 }
 
 /* 手机卡片块右上角查看更多 */
+
 a.more {
   position: absolute;
   right: 0;
@@ -51,8 +56,10 @@ a.more {
   color: #424242;
   transition: all .4s;
 }
+
 /* 手机卡片块右上角图标 > */
- a.more > i.icon {
+
+a.more>i.icon {
   height: 12px;
   padding: 4px;
   margin-left: 8px;
@@ -63,19 +70,22 @@ a.more {
   color: #fff;
   transition: all .4s;
 }
+
 /* 手机卡片块右上角查看更多:hover 样式 */
+
 a.more:hover {
   color: #ff6709;
   transition: all .4s;
 }
 
-a.more:hover > i {
+a.more:hover>i {
   background-color: #ff6709;
   transition: all .4s;
 }
 
 /* 手机板块购物卡片样式 */
-.phone-card-container  ul.container-bottom-right > li {
+
+.phone-card-container ul.container-bottom-right>li {
   position: relative;
   margin-left: 14px;
   margin-bottom: 14px;
@@ -92,6 +102,7 @@ a.more:hover > i {
 }
 
 /* 购物卡片包含块右侧统一样式 */
+
 ul.container-bottom-right {
   display: flex;
   width: 992px;
@@ -102,8 +113,10 @@ ul.container-bottom-right {
   visibility: visible;
   transition: visibility 0s 999s;
 }
+
 /* 正常大小购物卡片统一样式 */
-ul.container-bottom-right > li:not(:last-child) {
+
+ul.container-bottom-right>li:not(:last-child) {
   position: relative;
   margin-left: 14px;
   margin-bottom: 14px;
@@ -113,29 +126,30 @@ ul.container-bottom-right > li:not(:last-child) {
   background-color: #fff;
   transition: all .2s linear;
 }
+
 /* 正常大小购物卡片:hover样式 */
-ul.container-bottom-right > li:not(:last-child):hover{
+
+ul.container-bottom-right>li:not(:last-child):hover {
   transition: all .2s linear;
-  transform: translate3d(0,-2px,0);
-  box-shadow: 0 15px 30px rgba(0,0,0,.1);
+  transform: translate3d(0, -2px, 0);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
 }
 
 /* 手机板块购物卡片:hover样式 */
 
-div.phone-card-container ul.container-bottom-right > li:last-child:hover {
+div.phone-card-container ul.container-bottom-right>li:last-child:hover {
   transition: all .2s linear;
-  transform: translate3d(0,-2px,0);
-  box-shadow: 0 15px 30px rgba(0,0,0,.1);
-} 
+  transform: translate3d(0, -2px, 0);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
+}
 
-
-ul.container-bottom-right > li > a > img {
+ul.container-bottom-right>li>a>img {
   width: 160px;
   height: 160px;
   padding: 0 37px 18px;
 }
 
-ul.container-bottom-right > li > a > h3 {
+ul.container-bottom-right>li>a>h3 {
   width: 214px;
   margin: 0 10px 2px;
   font-size: 14px;
@@ -162,19 +176,18 @@ p.card-price {
   text-align: center;
 }
 
-p.card-price > span.now{
+p.card-price>span.now {
   color: #ff6709;
 }
 
-p.card-price > span.past{
+p.card-price>span.past {
   color: #b0b0b0;
   text-decoration: #b0b0b0 solid line-through;
 }
 
-
 /* 小商品卡样式*/
 
-div.small-card{
+div.small-card {
   width: 234px;
   height: 93px;
   padding-top: 50px;
@@ -186,11 +199,11 @@ div.small-card{
 
 div.small-card:hover {
   transition: all .2s linear;
-  transform: translate3d(0,-2px,0);
-  box-shadow: 0 10px 20px rgba(0,0,0,.1);
+  transform: translate3d(0, -2px, 0);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .1);
 }
 
-div.small-card img{
+div.small-card img {
   float: right;
   width: 80px;
   height: 80px;
@@ -225,8 +238,8 @@ div.browse-more {
 
 div.browse-more:hover {
   transition: all .2s linear;
-  transform: translate3d(0,-2px,0);
-  box-shadow: 0 10px 20px rgba(0,0,0,.1);
+  transform: translate3d(0, -2px, 0);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .1);
 }
 
 div.more-left {
@@ -235,7 +248,7 @@ div.more-left {
   color: #333;
 }
 
-div.more-left > p.small {
+div.more-left>p.small {
   font-size: 12px;
   color: #757575;
 }
@@ -249,22 +262,23 @@ div.more-right {
 }
 
 /* 通用的左侧两张图片样式 */
-.container-bottom-left > div > a > img {
+
+.container-bottom-left>div>a>img {
   width: 234px;
   height: 300px;
 }
 
-.container-bottom-left > div {
+.container-bottom-left>div {
   width: 234px;
   height: 300px;
   margin-bottom: 14px;
   transition: all .2s linear;
 }
 
-.container-bottom-left > div:hover {
+.container-bottom-left>div:hover {
   transition: all .2s linear;
-  transform: translate3d(0,-2px,0);
-  box-shadow: 0 15px 30px rgba(0,0,0,.1);
+  transform: translate3d(0, -2px, 0);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
 }
 
 #card-container {
@@ -285,7 +299,7 @@ div.more-right {
   transition: none;
 }
 
-#card-container > section{
+#card-container>section {
   float: left;
   margin-left: 30px;
   height: 24px;
@@ -296,50 +310,50 @@ div.more-right {
 section.part-1 {
   color: #ff6700;
   border-bottom: 2px solid #ff6700;
-  transition: 0s 999s;
+  transition: color border-bottom-color 0s 999s;
 }
 
 section.part-2 {
   color: #333;
   border-bottom: 2px solid transparent;
-  transition: 0s 999s;
+  transition: color border-bottom-color 0s 999s;
 }
 
 section.part-3 {
   color: #333;
   border-bottom: 2px solid transparent;
-  transition: 0s 999s;
+  transition: color border-bottom-color 0s 999s;
 }
 
-#card-container > section.part-1:hover {
+#card-container>section.part-1:hover {
   color: #ff6700;
-  border-bottom-color:#ff6700;
-  transition:none;
+  border-bottom-color: #ff6700;
+  transition: none;
 }
 
-#card-container > section.part-2:hover {
+#card-container>section.part-2:hover {
   color: #ff6700;
-  border-bottom-color:#ff6700;
-  transition:none;
+  border-bottom-color: #ff6700;
+  transition: none;
 }
 
-#card-container > section.part-3:hover {
+#card-container>section.part-3:hover {
   color: #ff6700;
-  border-bottom-color:#ff6700;
-  transition:none;
+  border-bottom-color: #ff6700;
+  transition: none;
 }
 
-#card-container > section.part-1:hover > ul {
+#card-container>section.part-1:hover>ul {
   visibility: visible;
   transition: none;
 }
 
-#card-container > section.part-2:hover > ul {
+#card-container>section.part-2:hover>ul {
   visibility: visible;
   transition: none;
 }
 
-#card-container > section.part-3:hover > ul {
+#card-container>section.part-3:hover>ul {
   visibility: visible;
   transition: none;
 }
@@ -353,7 +367,7 @@ ul.card-p1 {
 div.video-container {
   width: 1226px;
   height: 357px;
-  margin:0 auto 8px;
+  margin: 0 auto 8px;
 }
 
 .video-top {
@@ -373,7 +387,7 @@ ul.video-bottom {
   flex-flow: row nowrap;
 }
 
-ul.video-bottom > li {
+ul.video-bottom>li {
   width: 296px;
   height: 285px;
   margin-bottom: 14px;
@@ -411,7 +425,7 @@ ul.video-bottom p {
   overflow: hidden;
 }
 
-ul.video-bottom > li i {
+ul.video-bottom>li i {
   display: block;
   position: absolute;
   left: 20px;
@@ -423,7 +437,7 @@ ul.video-bottom > li i {
   font-size: 30px;
   border: 2px solid #fff;
   border-radius: 12px;
-  background-color: rgba(0,0,0,.6);
+  background-color: rgba(0, 0, 0, .6);
   color: #fff;
   transition: all .2s;
   overflow: hidden;
@@ -434,15 +448,8 @@ ul.video-bottom img:hover+i {
   border-color: #ff6709;
 }
 
-ul.video-bottom > li:hover {
+ul.video-bottom>li:hover {
   transition: all .2s linear;
-  transform: translate3d(0,-2px,0);
-  box-shadow: 0 15px 30px rgba(0,0,0,.1);
+  transform: translate3d(0, -2px, 0);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
 }
-
-
-
-
-
-
-
