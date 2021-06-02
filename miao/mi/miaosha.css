@@ -29,30 +29,41 @@ div.miaosha {
   right: 0;
   top: -35px;
   color: #b0b0b0;
+  cursor: pointer;
 }
 
 .miaosha label[class^="left-to"] {
   right: 35px;
   top: -35px;
   color: #b0b0b0;
+  cursor: pointer;
 }
 
-#right-to-2:checked~.miaosha-bottom-swiper > ul {
+.miaosha > .miaosha-bottom > label.left-to-1 {
+  color: #e0e0e0;
+  cursor: default;
+}
+
+#right-to-2:checked~.miaosha-bottom-swiper>ul {
   left: -992px;
   transition: 1s;
 }
 
-#right-to-2:checked~label.right-to-3,
 #right-to-2:checked~label.left-to-1 {
+  color: #b0b0b0;
+  cursor: pointer;
+}
+
+#right-to-2:checked~label.right-to-3, #right-to-2:checked~label.left-to-1 {
   z-index: 999;
 }
 
-#right-to-3:checked~.miaosha-bottom-swiper > ul {
+#right-to-3:checked~.miaosha-bottom-swiper>ul {
   left: -1736px;
   transition: 1s;
 }
 
-#right-to-3:checked~label.right-to-3{
+#right-to-3:checked~label.right-to-3 {
   color: #e0e0e0;
   cursor: default;
   z-index: 999;
@@ -61,16 +72,22 @@ div.miaosha {
 #right-to-3:checked~label.left-to-2 {
   z-index: 999;
 }
-#left-to-2:checked~.miaosha-bottom-swiper > ul {
+
+#left-to-2:checked~.miaosha-bottom-swiper>ul {
   left: -992px;
   transition: 1s;
+}
+
+#left-to-2:checked~label.left-to-1 {
+  color: #b0b0b0;
+  cursor: pointer;
 }
 
 .miaosha-bottom label:hover {
   color: #ff6709;
 }
 
-#left-to-1:checked~.miaosha-bottom-swiper > ul {
+#left-to-1:checked~.miaosha-bottom-swiper>ul {
   left: 0;
   transition: 1s;
 }
@@ -84,7 +101,6 @@ div.miaosha {
   cursor: default;
   z-index: 999;
 }
-
 
 div.miaosha-top {
   width: 1226px;
@@ -108,8 +124,9 @@ div.miaosha-bottom-time {
   width: 234px;
   height: 300px;
   padding-top: 39px;
-  background-color: rgb(241,237,237);
-  border-top: 1px solid #e53935;;
+  background-color: rgb(241, 237, 237);
+  border-top: 1px solid #e53935;
+  ;
 }
 
 div.time-top {
@@ -129,7 +146,7 @@ div.time-top {
 
 div.time-to-end {
   font-size: 15px;
-  color: rgba(0,0,0,.54);
+  color: rgba(0, 0, 0, .54);
   text-align: center;
 }
 
@@ -138,7 +155,7 @@ div.time {
   margin: 28px 33px 0;
 }
 
-div.time > span {
+div.time>span {
   float: left;
   background: #605751;
   width: 46px;
@@ -149,7 +166,7 @@ div.time > span {
   color: #fff;
 }
 
-div.time > i {
+div.time>i {
   float: left;
   width: 15px;
   height: 46px;
@@ -160,7 +177,6 @@ div.time > i {
   font-style: normal;
 }
 
-
 div.miaosha-bottom-swiper {
   width: 978px;
   height: 340px;
@@ -169,41 +185,41 @@ div.miaosha-bottom-swiper {
   overflow: hidden;
 }
 
-div.miaosha-bottom-swiper > ul {
+div.miaosha-bottom-swiper>ul {
   display: flex;
   flex-flow: row nowrap;
   justify-content: left;
   position: absolute;
-  left: -992px;
+  left: 0;
 }
 
-div.miaosha-bottom-swiper > ul > li {
+div.miaosha-bottom-swiper>ul>li {
   width: 234px;
   height: 339px;
   margin-right: 14px;
-  background-color: rgb(255,255,255);
+  background-color: rgb(255, 255, 255);
   border-top: 1px solid;
 }
 
-div.miaosha-bottom-swiper > ul > li:last-child {
+div.miaosha-bottom-swiper>ul>li:last-child {
   margin-right: 0;
 }
 
-div.miaosha-bottom-swiper > ul > li > a {
+div.miaosha-bottom-swiper>ul>li>a {
   display: block;
   width: 234px;
   height: 300px;
   padding-top: 39px;
 }
 
-div.miaosha-bottom-swiper > ul > li img {
+div.miaosha-bottom-swiper>ul>li img {
   display: block;
   width: 160px;
   height: 160px;
   padding: 0 37px 27px 37px;
 }
 
-div.miaosha-bottom-swiper > ul > li h3 {
+div.miaosha-bottom-swiper>ul>li h3 {
   width: 194px;
   margin: 0 20px 3px 20px;
   font-size: 14px;
@@ -230,29 +246,33 @@ div.miaosha-bottom-swiper > ul > li h3 {
   text-align: center;
 }
 
-.miaosha-price > span:first-child {
+.miaosha-price>span:first-child {
   color: #ff6709;
 }
 
-.miaosha-price > span:last-child {
+.miaosha-price>span:last-child {
   color: #b0b0b0;
   text-decoration: #b0b0b0 solid line-through;
 }
 
-
 /* 轮播图上边框颜色 */
-.miaosha-bottom-swiper > ul > li:nth-child(5n+1){
+
+.miaosha-bottom-swiper>ul>li:nth-child(5n+1) {
   border-top-color: #ffac13;
 }
-.miaosha-bottom-swiper > ul > li:nth-child(5n+2){
+
+.miaosha-bottom-swiper>ul>li:nth-child(5n+2) {
   border-top-color: #83c44e;
 }
-.miaosha-bottom-swiper > ul > li:nth-child(5n+3){
+
+.miaosha-bottom-swiper>ul>li:nth-child(5n+3) {
   border-top-color: #2196f3;
 }
-.miaosha-bottom-swiper > ul > li:nth-child(5n+4){
+
+.miaosha-bottom-swiper>ul>li:nth-child(5n+4) {
   border-top-color: #e53935;
 }
-.miaosha-bottom-swiper > ul > li:nth-child(5n+5){
+
+.miaosha-bottom-swiper>ul>li:nth-child(5n+5) {
   border-top-color: #00c0a5;
 }
