@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+    }
+
+    div[class^="smile"] {
+      width: 33%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    div.block {
+      width: 350px;
+      height: 350px;
+      border: 2px solid black;
+      border-radius: 50%;
+      position: relative;
+    }
+/* 左侧两个元素反向公转 */
+    .p1 {
+      width: 100%;
+      height: 50px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      animation: linear left-rotate infinite 8s normal;
+    }
+
+    .p1 > img {
+      position: relative;
+      animation: linear left-rotate infinite 8s reverse;
+    }
+
+    img {
+      width: 50px;
+      left: -26px;
+    }
+
+    .right > img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      animation: linear right-rotate infinite 8s normal;;
+    }
+
+    @keyframes left-rotate {
+      from{
+        transform: rotate(0deg);
+      }
+      to{
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes right-rotate {
+      from{
+        transform: rotate(0deg) translate(175px) rotate(0deg);
+      }
+      to{
+        transform: rotate(-360deg) translate(175px) rotate(360deg);
+      }
+    }
+
+    @keyframes sin {
+      from{
+        left: 0px;
+      }
+      to {
+        left: 315px;
+      }
+    }
+
+    @keyframes cos {
+      from{
+        top: 0px;
+      }
+
+      to{
+        top:315px;
+      }
+    }
+
+    .center > img {
+      position: relative;
+      margin: auto;
+      animation: sin infinite -0.5s 1s alternate cubic-bezier(.36,0,.64,1),cos infinite  1s alternate cubic-bezier(.36,0,.64,1);
+    }
+  </style>
+</head>
+<body>
+  <div class="smile1">
+    <div class="left block">
+      <section class="p1">
+        <img src="./zhuan.jpg" alt="">
+      </section>
+    </div>
+  </div>
+  <div class="smile2">
+    <div class="center block">
+      <img src="./zhuan.jpg" alt="">
+    </div>
+  </div>
+  <div class="smile3">
+    <div class="right block">
+      <img src="./zhuan.jpg" alt="">
+    </div>
+  </div>
+</body>
+</html>

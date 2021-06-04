@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container {
+      width: 600px;
+      height: 600px;
+      margin: 25px auto;
+      overflow: hidden;
+    }
+
+    section {
+      position: relative;
+      width: 450px;
+      height: 450px;
+      border: 1px solid rgb(235,235,235);
+      margin: 74px;
+      border-radius: 50%;
+      box-shadow: 0 0 50px rgb(225,225,225);
+    }
+
+    .hour,.minute,.second {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .h {
+      position: absolute;
+      width: 7px;
+      height: 26%;
+      left: 0;
+      right: 0;
+      bottom: 50%;
+      margin: auto;
+      background-color: black;
+      border-radius: 50% 50% 40% 40%;
+      transform: rotate(-69deg);
+      transform-origin: bottom center;
+    }
+
+    .m {
+      position: absolute;
+      width: 5px;
+      height: 34%;
+      left: 0;
+      right: 0;
+      bottom: 50%;
+      margin: auto;
+      background-color: black;
+      border-radius: 50% 50% 40% 40%;
+      transform: rotate(30deg);
+      transform-origin: bottom center;
+    }
+
+    .s {
+      position: absolute;
+      width: 3px;
+      height: 55%;
+      left: 0;
+      right: 0;
+      bottom: 40%;
+      margin: auto;
+      background-color: rgb(214, 55, 55);
+      border-radius: 50% 50% 30% 30%;
+    }
+
+    .center {
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      border-radius: 50%;
+      background-color: rgb(235,235,235);
+      margin: auto;
+    }
+
+    [class^="time"] {
+      position: absolute;
+      width: 13px;
+      height: 100%;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      margin: auto;
+    }
+    span {
+      display: block;
+      font-size: 18px;
+      margin-top: 8px;
+    }
+    .time1{
+      transform: rotate(30deg);
+    }
+    .time1  > span{
+      transform: rotate(-30deg);
+    }
+    .time2{
+      transform: rotate(60deg);
+    }
+    .time2  > span{
+      transform: rotate(-60deg);
+    }
+    .time3{
+      transform: rotate(90deg);
+    }
+    .time3  > span{
+      transform: rotate(-90deg);
+    }
+    .time4{
+      transform: rotate(120deg);
+    }
+    .time4  > span{
+      transform: rotate(-120deg);
+    }
+    .time5{
+      transform: rotate(150deg);
+    }
+    .time5  > span{
+      transform: rotate(-150deg);
+    }
+    .time6{
+      transform: rotate(180deg);
+    }
+    .time6  > span{
+      transform: rotate(-180deg);
+    }
+    .time7{
+      transform: rotate(210deg);
+    }
+    .time7  > span{
+      transform: rotate(-210deg);
+    }
+    .time8{
+      transform: rotate(240deg);
+    }
+    .time8  > span{
+      transform: rotate(-240deg);
+    }
+    .time9{
+      transform: rotate(270deg);
+    }
+    .time9  > span{
+      transform: rotate(-270deg);
+    }
+    .time10{
+      transform: rotate(300deg);
+    }
+    .time10  > span{
+      transform: rotate(-300deg);
+    }
+    .time11{
+      transform: rotate(330deg);
+    }
+    .time11  > span{
+      transform: rotate(-330deg);
+    }
+    .time12{
+      transform: rotate(360deg);
+    }
+    .time12  > span{
+      transform: rotate(-360deg);
+    }
+
+    x[class^="time"]::after {
+      content: '';
+      position: absolute;
+      width: 3px;
+      height: 15px;
+      background-color: #333;
+      top: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+
+    @keyframes run {
+      from{
+        transform: rotate(0);
+      }
+      to{
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes run-second {
+      0% {
+        transform: rotate(0);
+      }
+      5% {
+        transform: rotate(2deg);
+      }
+      15% {
+        transform: rotate(-1deg);
+      }
+      20%{
+        transform: rotate(1deg);
+      }
+      100%{
+        transform: rotate(0);
+      }
+    }
+
+    .s {
+      animation: run-second 1s linear infinite;
+      transform-origin: 1.5px 202.5px;
+    }
+
+    .second {
+      animation: run 60s linear infinite;
+    }
+    .minute {
+      animation: run 3600s linear infinite;
+    }
+    .hour {
+      animation: run 43200s linear infinite;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section>
+      <div class="hour">
+        <span class="h"></span>
+      </div>
+      <div class="minute">
+        <span class="m"></span>
+      </div>
+      <div class="second">
+        <span class="s"></span>
+      </div>
+      <div class="center"></div>
+      <div class="time1"><span>1</span></div>
+      <div class="time2"><span>2</span></div>
+      <div class="time3"><span>3</span></div>
+      <div class="time4"><span>4</span></div>
+      <div class="time5"><span>5</span></div>
+      <div class="time6"><span>6</span></div>
+      <div class="time7"><span>7</span></div>
+      <div class="time8"><span>8</span></div>
+      <div class="time9"><span>9</span></div>
+      <div class="time10"><span>10</span></div>
+      <div class="time11"><span>11</span></div>
+      <div class="time12"><span>12</span></div>
+    </section>
+  </div>
+</body>
+</html>

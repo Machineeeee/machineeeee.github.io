@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container {
+      width: 150px;
+      height: 150px;
+      margin: 200px auto;
+      position: relative;
+      transform: rotateY(30deg) rotateX(30deg) rotateZ(30deg);
+      transform-style: preserve-3d;
+      animation: run 10s cubic-bezier(0.36,0,0.64,1) infinite alternate;
+    }
+
+    div[class^="p"]{
+      width: 130px;
+      height: 130px;
+      position: absolute;
+      line-height: 150px;
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+      border: 10px solid rgb(222, 239, 241,0.5);
+      border-radius: 40px;
+      background-clip: content-box;
+    }
+
+    .p1 {
+      transform: rotateY(0deg) translateZ(75px);
+      background-color: rgb(255, 99, 71,0.6);
+    }
+    .p6 {
+      transform: rotateY(180deg) translateZ(75px);
+      background-color:rgba(12, 225, 233, 0.6)
+    }
+    .p2 {
+      transform: rotateY(90deg) translateZ(75px);
+      background-color:rgba(29, 51, 253, 0.6)
+    }
+    .p4 {
+      transform: rotateY(-90deg) translateZ(75px);
+      background-color:rgba(252, 9, 9, 0.6)
+    }
+    .p3 {
+      transform: rotateX(90deg) translateZ(75px);
+      background-color:rgba(9, 248, 69, 0.6)
+    }
+    .p5 {
+      transform: rotateX(-90deg) translateZ(75px);
+      background-color:rgba(250, 246, 8, 0.6)
+    }
+
+    @keyframes run {
+      from{
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0) translateY(0);
+      }
+
+      to{
+        transform: rotateX(540deg) rotateY(960deg) rotateZ(720deg) translateX(400PX) translateY(200px);
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="p1">1</div>
+    <div class="p2">2</div>
+    <div class="p3">3</div>
+    <div class="p4">4</div>
+    <div class="p5">5</div>
+    <div class="p6">6</div>
+  </div>
+</body>
+</html>
