@@ -1,0 +1,258 @@
+html {
+  font-size: calc(100vw/720 * 100);
+}
+
+body {
+  width: 7.2rem;
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+header {
+  display: flex;
+  width: 100%;
+  height: 0.84rem;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(242,242,242);
+}
+
+
+header > div.icon > img {
+  width: 0.48rem;
+  padding: 0.26rem;
+}
+
+div.search {
+  width: 5.18rem;
+  height: 0.6rem;
+  line-height: 0.6rem;
+  color: rgba(0,0,0,.3);
+  border: 1px solid #e5e5e5;
+  background-color: #fff;
+  border-radius: .04rem;
+  text-align: left;
+  font-size: .3rem;
+}
+
+div.search > img {
+  vertical-align: bottom;
+  width: 0.6rem;
+}
+
+div.head-right > img{
+  width: 0.4rem;
+  height: 0.4rem;
+  padding: 0 0.3rem;
+  display: block;
+}
+
+ul.nav-top {
+  width: 100%;
+  color: #747474;
+  font-size: 0.26rem;
+  line-height: .55rem;
+  border-bottom: 2px solid rgba(237,91,0,0);
+  background-color: rgb(242,242,242);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+ul.nav-top > li > img {
+  width: 0.4rem;
+  height: 0.4rem;
+  vertical-align: middle;
+}
+
+ul.nav-top > li:not(:last-child) {
+  padding: 0 0.25rem;
+  border-bottom: 2px solid transparent;
+}
+
+ul.nav-top > li:last-child {
+  padding: 0 0.13rem 0 0.2rem;
+}
+
+ul.nav-top > li:first-child{
+  color: rgb(237, 91, 0);
+  border-color: rgb(237, 91, 0);
+}
+
+div.slider > img {
+  display: block;
+  width: 100%;
+}
+
+ul.nav-middle {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+}
+
+ul.nav-middle > li > img {
+  width: 1.44rem;
+  height: 1.52rem;
+}
+
+div.divider-line {
+  width: 100%;
+  border-bottom: 0.16rem solid rgb(242,242,242);
+  background-color: rgb(242,242,242);
+}
+
+
+.shopping-1 {
+  width: 100%;
+  height: 5.08rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.shopping-1 > .shopping-1-left > img {
+  width: 3.58rem;
+  height: 5.08rem;
+}
+
+.shopping-1 > .shopping-1-right img {
+  display: block;
+  width: 3.58rem;
+  height: 2.52rem;
+}
+
+div.shopping-1-right {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+
+div.big-picture > img {
+  display: block;
+  width: 100%;
+}
+
+.shopping-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  padding: 0 0.12rem;
+  justify-content: space-between;
+}
+
+.shopping-card > li > img {
+  display: block;
+  width: 3.44rem;
+  height: 2.8rem;
+}
+
+.shopping-card > li {
+  margin-top: 0.06666rem;
+}
+
+.shopping-card > li > ul.description {
+  display: block;
+  width: 2.88rem;
+  height: 1.688rem;
+  padding: 0.2rem 0.27rem;
+}
+
+ul.description > li {
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+ul.description > li:nth-child(1) {
+  font-size: .28rem;
+  color: rgba(0,0,0,.87);
+  line-height: 1.15;
+}
+
+ul.description > li:nth-child(2) {
+  margin-top: .06rem;
+  font-size: .22rem;
+  line-height: .3rem;
+  color: rgba(0,0,0,.54);
+}
+
+ul.description > li:nth-child(3) {
+    font-size: .28rem;
+    color: #ea625b;
+    height: 1.5em;
+    line-height: 1.5em;
+}
+
+ul.description > li:nth-child(4) {
+  width: 2rem;
+  background: #ea625b;
+  border-radius: .05rem;
+  color: #fff;
+  font-size: .24rem;
+  padding: .16rem 0;
+  font-weight: 700;
+  margin: auto;
+  line-height: 1.15;
+}
+
+div.more {
+  width: 100%;
+  height: 1rem;
+  line-height: 1rem;
+  font-size: .28rem;
+  text-align: center;
+  color: rgba(0,0,0,.6);
+}
+.phone {
+  border-top: 3px solid rgb(215,215,215);
+}
+
+ul.link-picture {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  width: 100%;
+}
+
+ul.link-picture > li > img{
+  display: block;
+  width: 3.58rem;
+  height: 4.8rem;
+  margin-bottom: 0.04rem;
+}
+
+div.foot > img {
+  width: 100%;
+  height: 1.06rem;
+}
+
+ul.footer {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+ul.footer > li {
+  font-size: 0.22rem;
+  color: #999;
+  line-height: 1.15;
+  text-align: center;
+}
+
+ul.footer > li:first-child {
+  color: #ff6700;
+}
+
+ul.footer > li >img {
+  display: block;
+  width: 0.4rem;
+  height: 0.4rem;
+  margin: 0 0.498rem 0.1rem 0.498rem;
+}
+
+
