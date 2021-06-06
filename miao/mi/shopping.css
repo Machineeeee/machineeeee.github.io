@@ -310,19 +310,19 @@ div.more-right {
 section.part-1 {
   color: #ff6700;
   border-bottom: 2px solid #ff6700;
-  transition: color  0s 999s, border-color 0s 999s;
+  transition:color 0s 999s,border 0s 999s;
 }
 
 section.part-2 {
   color: #333;
   border-bottom: 2px solid transparent;
-  transition: color  0s 999s,border-color 0s 999s;
+  transition: color 0s 999s,border 0s 999s;
 }
 
 section.part-3 {
   color: #333;
   border-bottom: 2px solid transparent;
-  transition: color  0s 999s ,border-color 0s 999s;
+  transition:color 0s 999s,border 0s 999s;
 }
 
 #card-container>section.part-1:hover {
