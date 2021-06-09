@@ -809,8 +809,8 @@ var sum = 0;
         c2 = k * 9 * 9 + j * 9 + i;
         if (c1 == c2) {
           console.log(c1);
-          console.log("" + i + j + k);
-          console.log("" + k + j + i);
+          console.log(i * 100 + j * 10 + k);
+          console.log(k * 100 + j * 10 + i);
           break;
         }
       }
@@ -1000,6 +1000,7 @@ var sum = 0;
     Cm = i * Cn;
     if (i) {
       console.log(Cm);
+      console.log(" ");
     }
   }
     if (n == 0) {
