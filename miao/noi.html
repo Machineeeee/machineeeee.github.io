@@ -659,7 +659,7 @@ var sum = 0;
 <script id="ch0105/16">
   var n = +prompt();
   var k = +prompt();
-  var year = 0, price = 200, sum = 0;
+    var year = 1, price = 200, sum = 50;
   while (sum < price) {
     price *= (1 + k / 100);
     year++;
@@ -730,8 +730,8 @@ var sum = 0;
       y /= 2;
     }
   }
-  console.log(sum);
-  console.log(y);
+    console.log(sum.toFixed(4));
+    console.log(y.toFixed(7));
 </script>
 <script id="ch0105/21">
   var n = +prompt();
@@ -886,6 +886,7 @@ var sum = 0;
   var n = +prompt();
   var m = +prompt();
   var i, j, count;
+    var str = [];
   for (i = 1; i <= n; i++) {
     count = 0;
     for (j = 1; j <= i && j <= m; j++) {
@@ -894,9 +895,10 @@ var sum = 0;
       }
     }
     if (count % 2 != 0) {
-      console.log(i);
+      str[str.length] = i;
     }
   }
+    console.log(str.join());
 </script>
 
 <script id="ch0105/32">
@@ -1000,6 +1002,9 @@ var sum = 0;
       console.log(Cm);
     }
   }
+    if (n == 0) {
+      console.log(0);
+    }
 </script>
 
 <script id="ch0105/39">
