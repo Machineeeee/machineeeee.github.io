@@ -993,19 +993,22 @@ var sum = 0;
 </script>
 
 <script id="ch0105/38">
-  var n = +prompt();
-  var i, Cn, Cm;
-  for (i = n; i >= 0; i--) {
-    Cn = +prompt();
-    Cm = i * Cn;
-    if (i) {
-      console.log(Cm);
-      console.log(" ");
-    }
-  }
+        var p = +prompt();
+        var j;
+        for (j = 0; j < p; j++) {
+        var n = +prompt();
+        var i, Cn, Cm;
+        for (i = n; i >= 0; i--) {
+          Cn = +prompt();
+          Cm = i * Cn;
+          if (i) {
+            console.log(Cm);
+        }
+      }
     if (n == 0) {
       console.log(0);
     }
+      }
 </script>
 
 <script id="ch0105/39">
