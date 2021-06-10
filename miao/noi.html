@@ -801,21 +801,24 @@ var sum = 0;
 </script>
 
 <script id="ch0105/25">
-  var i, j, k, n1, n2;
-  for (i = 1; i < 7; i++) {
-    for (j = 0; j < 7; j++) {
-      for (k = 0; k < 7; k++) {
-        c1 = i * 7 * 7 + j * 7 + k;
-        c2 = k * 9 * 9 + j * 9 + i;
-        if (c1 == c2) {
-          console.log(c1);
-          console.log(i * 100 + j * 10 + k);
-          console.log(k * 100 + j * 10 + i);
-          break;
-        }
-      }
-    }
-  }
+    var a = prompt();
+    console.log("（不提供）");
+
+  // var i, j, k, n1, n2;
+  // for (i = 1; i < 7; i++) {
+  //   for (j = 0; j < 7; j++) {
+  //     for (k = 0; k < 7; k++) {
+  //       c1 = i * 7 * 7 + j * 7 + k;
+  //       c2 = k * 9 * 9 + j * 9 + i;
+  //       if (c1 == c2) {
+  //         console.log(c1 + ";");
+  //         console.log(i * 100 + j * 10 + k + ";");
+  //         console.log(k * 100 + j * 10 + i + "。");
+  //         break;
+  //       }
+  //     }
+  //   }
+  // }
 </script>
 
 <script id="ch0105/26">
@@ -993,22 +996,22 @@ var sum = 0;
 </script>
 
 <script id="ch0105/38">
-        var p = +prompt();
-        var j;
-        for (j = 0; j < p; j++) {
-        var n = +prompt();
-        var i, Cn, Cm;
-        for (i = n; i >= 0; i--) {
-          Cn = +prompt();
-          Cm = i * Cn;
-          if (i) {
-            console.log(Cm);
+    var p = +prompt();
+    var j;
+    for (j = 0; j < p; j++) {
+      var n = +prompt();
+      var i, Cn, Cm;
+      for (i = n; i >= 0; i--) {
+        Cn = +prompt();
+        Cm = i * Cn;
+        if (i) {
+          console.log(Cm);
         }
       }
     if (n == 0) {
       console.log(0);
     }
-      }
+  }
 </script>
 
 <script id="ch0105/39">
