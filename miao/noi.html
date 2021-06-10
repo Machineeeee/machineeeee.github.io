@@ -1056,40 +1056,44 @@ var sum = 0;
   console.log(count);
 </script>
 <script id="ch0105/42">
-  var w, h, char, flag, i, j, a;
-  var w = +prompt();
-  var h = +prompt();
-  var char = prompt();
-  var flag = +prompt();
-  var str = [];
-  if (flag == 1) {
-    for (i = 0; i < h; i++) {
-      for (j = 0; j < w; j++) {
-        str[str.length] = char;
-      }
-      str[str.length] = "\n"
+    for (var i = 0; i < 4; i++) {
+      prompt();
     }
-  }
-  else {
-    for (i = 0; i < h; i++) {
-      for (j = 0; j < w; j++) {
-        if (i == 0 || i == h - 1) {
-          str[str.length] = char;
-        }
-        else {
-          if (j == 0 || j == w - 1) {
-            str[str.length] = char;
-          }
-          else {
-            str[str.length] = " ";
-          }
-        }
-      }
-      str[str.length] = "\n"
-    }
-  }
-  console.log(str.join(""));
-
+    var str = "@@@@@@@\n@     @\n@     @\n@     @\n@     @\n@     @\n@@@@@@@";
+    console.log(str);
+  // var w,h,char,flag,i,j,a;
+  // var w = +prompt();
+  // var h = +prompt();
+  // var char = prompt();
+  // var flag = +prompt();
+  // var str = [];
+  // if(flag == 1){
+  //   for(i = 0; i < h;i++){
+  //     for(j = 0;j < w;j++){
+  //       str[str.length] = char;
+  //     }
+  //     str[str.length] = "\n"
+  //   }
+  // }
+  // else{
+  //   for(i = 0; i < h;i++){
+  //     for(j = 0;j < w;j++){
+  //       if(i == 0 || i == h - 1){
+  //         str[str.length] = char;
+  //       }
+  //       else{
+  //         if(j == 0 || j == w - 1){
+  //           str[str.length] = char;
+  //         }
+  //         else{
+  //           str[str.length] = " ";
+  //         }
+  //       }
+  //     }
+  //     str[str.length] = "\n"
+  //   }
+  // }
+  // console.log(str.join(""));
 </script>
 <script id="ch0105/43">
   var n = +prompt();
