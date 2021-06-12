@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>画图</title>
+  <style>
+    canvas {
+      border: 2px solid #666;
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas width="500" height="970"></canvas>
+</body>
+<script>
+  var canvas = document.querySelector('canvas')
+  canvas.style.imageRendering = 'pixelated' //放大时的插帧方式：不插帧，直接放大像素
+  var ctx = canvas.getContext('2d')
+
+  function dot(x, y, color = 'black') {
+    x = Math.round(x)
+    y = Math.round(y)
+    ctx.fillStyle = color
+    ctx.fillRect(x, y, 1, 1)
+  }
+  /**
+   * YOUR TASK
+      * 在 坐标 (42, 42) 画出一个点
+      * 画一条实线
+      * 画一条一个实点一个空点的虚线
+      * 画一条两个实点两个空点的虚线
+      * 画一条三个实点两个空点的虚线
+      * 画一条45度的斜线
+      * 画一条30度的斜线（与x轴或y轴的夹角呈30度）
+      * 画一条跨越画布左上角和右下角的对角线
+      * 画一个空心矩形
+      * 画一个实心矩形
+      * 画两个个空心的圆，居中：
+        * 一个半径为50像素
+        * 一个半径为200像素
+      * 画一个实心的圆，半径至少为100像素
+      * 画一个【大小合适】的sin(x)的图像
+
+      * 画出rgb色彩空间的某一面（尺寸要大于100x100）
+        如果做出上一题后，尝试将其每个点的坐标乘以一个矩阵（如(2,0,0,2)或(1,0.27得到新的位置，即绘制出被线性变幻后的色彩空间某一面
+        可以考虑如下几种矩阵：
+           2 0
+           0 2
+           ------
+           1  0.27
+           0  1
+           ------
+           0.1    0.87
+           -0.87  0.1
+
+   */
+</script>
+<script>
+  // 不可更改上面的代码
+  // 你的代码写在这里
+  // YOUR CODE GOES BELOW
+  // sin函数和实线，虚线
+  for(let i = 0;i <= 500;i++ ){
+    dot(i,550,"black");
+    if(i%2){
+      dot(i,601,"black");
+    }
+    dot(i,Math.sin(i * 2 * Math.PI / 100 + Math.PI / 2) * 48 + 551,"rgb(66,66,66,0.5)");
+    dot(i,Math.sin(i * 2 * Math.PI / 100 + Math.PI / 2) * 48 + 551 + 1,"rgb(120,120,120,0.5)");
+    dot(i,Math.sin(i * 2 * Math.PI / 100 + Math.PI / 2) * 48 + 551 - 1,"rgb(120,120,120,0.5)");
+    dot(i,Math.sin(i * 2 * Math.PI / 100 + Math.PI / 2) * 48 + 551 + 2,"rgb(190,190,190,0.5)");
+    dot(i,Math.sin(i * 2 * Math.PI / 100 + Math.PI / 2) * 48 + 551 - 2,"rgb(190,190,190,0.5)");
+    dot(i+1,Math.sin(i * 2 * Math.PI / 100 + Math.PI / 2) * 48 + 551,"rgb(220,220,220,0.3)");
+    dot(i-1,Math.sin(i * 2 * Math.PI / 100 + Math.PI / 2) * 48 + 551,"rgb(220,220,220,0.3)");
+    dot(i+2,Math.sin(i * 2 * Math.PI / 100 + Math.PI / 2) * 48 + 551,"rgb(240,240,240,0.3)");
+    dot(i-2,Math.sin(i * 2 * Math.PI / 100 + Math.PI / 2) * 48 + 551,"rgb(240,240,240,0.3)");
+  }
+
+  for(let i = 0;i <= 500 ;i += 4){
+    if((i + 4) % 4 === 0){
+      dot(i,650,"black");
+      dot(i+1,650,"black");
+    }
+  }
+  for(let i = 0;i <= 500 ;i += 5){
+    if((i + 5) % 5 === 0){
+      dot(i,501,"black");
+      dot(i+1,501,"black");
+      dot(i+2,501,"black");
+    }
+  }
+// 对角线
+for(let k = 0; k < 7 ;k++){
+  for(let i = k;i <= 500;i += 7){
+    for(let j = i;j < i + 7 ; j++){
+      dot(j,j,"rgb(247,247,247,0.1)");
+      dot(j,i+1,"rgb(210,210,210,0.2)")
+      dot(j,i+2,"rgb(210,210,210,0.2)")
+      dot(j,i+3,"rgb(210,210,210,0.2)")
+      dot(j,i+4,"rgb(210,210,210,0.2)")
+      dot(j,i+5,"rgb(210,210,210,0.2)")
+      dot(j,i+6,"rgb(210,210,210,0.2)")
+    }
+  }
+}
+
+for(let k = 0; k < 5 ;k++){
+  for(let i = k;i <= 500;i += 5){
+    for(let j = i;j < i + 5 ; j++){
+      dot(j,j,"rgb(245,245,245,0.1)");
+      dot(j,i+1,"rgb(180,180,180,0.1)")
+      dot(j,i+2,"rgb(180,180,180,0.1)")
+      dot(j,i+3,"rgb(180,180,180,0.1)")
+      dot(j,i+4,"rgb(180,180,180,0.1)")
+    }
+  }
+}
+
+
+
+// 30度的斜线
+  const h = Math.sqrt(3);
+  for(let k = 0; k < 7 ;k++){
+    let z;
+  for(let i = k;i <= 500;i += 7){
+    for(let j = i;j < i + 7 ; j++){
+      z = Math.floor(i / h);
+      dot(j,z-3,"rgb(245,245,245,0.1)")
+      dot(j,z-2,"rgb(180,180,180,0.1)");
+      dot(j,z-1,"rgb(180,180,180,0.1)")
+      dot(j,z,"rgb(180,180,180,0.1)")
+      dot(j,z+1,"rgb(180,180,180,0.1)")
+      dot(j,z+2,"rgb(180,180,180,0.1)")
+      dot(j,z+3,"rgb(245,245,245,0.1)")
+
+    }
+  }
+}
+// 空心矩形
+for(let i = 5 ;i <= 100 ; i++){
+  dot(i,115,"black");
+  dot(i,160,"black");
+}
+for(let j = 115;j <= 160 ; j++){
+  dot(5,j,"black");
+  dot(100,j,"black");
+}
+// 实心矩形
+for(let i = 5 ;i <= 150 ; i++){
+  for(let j = 175 ;j <= 220;j++)
+  dot(i,j,"black");
+}
+
+//太极图外圈圆
+{
+  let j,k;
+  for(let i = 275; i <= 475; i++){
+    k = Math.sqrt(10000 - (i - 375) * (i - 375));
+    j = k + 120;
+    dot(j,i,"rgb(66,66,66,0.6)");//右半圆边界
+    dot(j + 1,i,"rgb(99,99,99,0.8)");//右半圆边界抗锯齿
+    dot(j - 1,i,"rgb(99,99,99,0.8)");
+    dot(j + 2,i,"rgb(99,99,99,0.3)");
+    dot(j - 2,i,"rgb(99,99,99,0.3)");
+    dot(j + 3,i,"rgb(99,99,99,0.1)");
+    dot(j - 3,i,"rgb(99,99,99,0.1)");
+    for(let n = j ; n >= 119; n--){
+      dot(n,i,"rgb(0,0,0)");//设置右半圆为黑色
+    }
+    j = 120 - k;
+    dot(j,i,"rgb(66,66,66,0.3)");//左半圆边界
+    dot(j + 1,i,"rgb(99,99,99,0.2)");//左半圆边界抗锯齿
+    dot(j - 1,i,"rgb(99,99,99,0.2)");
+    dot(j + 2,i,"rgb(99,99,99,0.1)");
+    dot(j - 2,i,"rgb(99,99,99,0.1)");
+  }
+}
+
+//太极图内圈
+{
+  let j,k;
+  for(let i = 275; i <= 375; i++){
+    k = Math.sqrt(2500 - (i - 325) * (i - 325))
+    j = 120 - k;
+    dot(j,i,"rgb(66,66,66,0.6)");//右半圆边界
+    dot(j + 1,i,"rgb(99,99,99,0.8)");//右半圆边界抗锯齿
+    dot(j - 1,i,"rgb(99,99,99,0.8)");
+    dot(j + 2,i,"rgb(99,99,99,0.3)");
+    dot(j - 2,i,"rgb(99,99,99,0.3)");
+    dot(j + 3,i,"rgb(99,99,99,0.1)");
+    dot(j - 3,i,"rgb(99,99,99,0.1)");
+    for(let n = j ;n <= 120;n++){
+      dot(n,i,"rgb(0,0,0)");//设置上部，中等大小圆左半边为黑色
+    }
+  }
+  for(let i = 375; i <= 475; i++){
+    k = Math.sqrt(2500 - (i - 425) * (i - 425))
+    j = 120 + k;
+    dot(j,i,"rgb(66,66,66,0.8)");//左半圆边界
+    dot(j + 1,i,"rgb(99,99,99,0.1)");//左半圆边界抗锯齿
+    dot(j - 1,i,"rgb(99,99,99,0.1)");
+    dot(j + 2,i,"rgb(99,99,99,0.4)");
+    dot(j - 2,i,"rgb(99,99,99,0.4)");
+    dot(j + 3,i,"rgb(99,99,99,0.2)");
+    dot(j - 3,i,"rgb(99,99,99,0.2)");
+    for(let n = j ; n >= 118; n--){
+      dot(n,i,"rgb(255,255,255)");//设置下部，中等大小圆右半边为白色
+    }
+  }
+  for(let i = 305; i <= 345; i++){
+    k = Math.sqrt(400 - (i - 325) * (i - 325))
+    j = 120 - k;
+    dot(j,i,"rgb(66,66,66,0.6)");
+    dot(j + 1,i,"rgb(99,99,99,0.8)");
+    dot(j + 2,i,"rgb(99,99,99,0.3)");
+    dot(j - 2,i,"rgb(99,99,99,0.3)");
+    dot(j,i + 1,"rgb(99,99,99,0.1)");
+    dot(j,i - 1,"rgb(99,99,99,0.1)");
+    for(let n = j ;n <= 121;n++){
+      dot(n,i,"rgb(255,255,255)");
+    }
+    j = 120 + k;
+    dot(j,i,"rgb(66,66,66,0.6)");
+    dot(j + 1,i,"rgb(99,99,99,0.8)");
+    dot(j - 1,i,"rgb(99,99,99,0.8)");
+    dot(j + 2,i,"rgb(99,99,99,0.3)");
+    dot(j - 2,i,"rgb(99,99,99,0.3)");
+    dot(j,i + 1,"rgb(99,99,99,0.1)");
+    dot(j,i - 1,"rgb(99,99,99,0.1)");
+    for(let n = j ;n >= 120;n--){
+      dot(n,i,"rgb(255,255,255)");//设置下部小圆为黑
+    }
+  }
+
+  for(let i = 405; i <= 445; i++){
+    k = Math.sqrt(400 - (i - 425) * (i - 425))
+    j = 120 - k;
+    dot(j,i,"rgb(66,66,66,0.2)");
+    dot(j + 1,i,"rgb(99,99,99,0.8)");
+    dot(j - 1,i,"rgb(99,99,99,0.8)");
+    dot(j + 2,i,"rgb(99,99,99,0.3)");
+    dot(j - 2,i,"rgb(99,99,99,0.3)");
+    dot(j,i + 1,"rgb(99,99,99,0.1)");
+    dot(j,i - 1,"rgb(99,99,99,0.1)");
+    for(let n = j ;n <= 121;n++){
+      dot(n,i,"rgb(0,0,0)");
+    }
+    j = 120 + k;
+    dot(j,i,"rgb(66,66,66,0.2)");
+    dot(j + 1,i,"rgb(99,99,99,0.8)");
+    dot(j - 1,i,"rgb(99,99,99,0.8)");
+    dot(j + 2,i,"rgb(99,99,99,0.3)");
+    dot(j - 2,i,"rgb(99,99,99,0.3)");
+    dot(j,i + 1,"rgb(99,99,99,0.1)");
+    dot(j,i - 1,"rgb(99,99,99,0.1)");
+    for(let n = j ;n >= 120;n--){
+      dot(n,i,"rgb(0,0,0)");//设置上部小圆为白
+    }
+  }
+}
+
+//rgb色彩空间
+{
+  for(let i = 320;i <= 447;i++){
+    for(let j = 30;j<=157;j++){
+      dot(i,j,"rgb" + "(" + (i - 320) * 2 + "," + 0 + "," + (j - 30) * 2 + ")");
+    }
+  }
+
+  for(let i = 0;i <= 128;i++){
+    for(let j = 652;j<=780;j++){
+      dot(i,j,"rgb" + "(" + 0 + "," + i * 2 + "," + (j - 652) * 2 + ")");
+    }
+  }
+
+  for(let i = 0;i <= 128;i++){
+    for(let j = 652;j<=908;j++){
+      let x = i * 2 + j * 0;
+      dot(x,j,"rgb" + "(" + 0 + "," + x + "," + (j - 652) + ")");
+    }
+  }
+
+  for(let i = 0;i <= 128;i++){
+    for(let j = 802;j<=930;j++){
+      let x = i * 1 + j * 0;
+      let y = i * 0.27 + j * 1;
+      dot(x,y,"rgb" + "(" + 0 + "," + x * 2 + "," + (y - 802) * 1.6 + ")");
+    }
+  }
+
+  for(let i = 800;i <= 928;i++){
+    for(let j = 0;j<=128;j++){
+      let x = i * 0.5 + j * (-0.87);
+      let y = i * 0.87 + j * 0.5;
+      dot(x,y,"rgb" + "(" + 0 + "," + (x - 300) * 1.5  + "," + (y - 696) * 1.5 + ")");
+    }
+  }
+}
+</script>
+</html>
