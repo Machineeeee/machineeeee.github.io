@@ -1140,3 +1140,264 @@ var sum = 0;
   }
   console.log(sum);
 </script>
+<script id="narcissistic">
+  let number = +prompt();
+  function isNarcissistic(x) {
+    let count = 0;
+    let sum = 0;
+    let n = x;
+    while (n) {
+      count++;
+      n = parseInt(n / 10);
+    }
+    n = x;
+    for (let i = 0; i < count; i++) {
+      sum += Math.pow(n % 10, count);
+      n = parseInt(n / 10);
+    }
+    let c;
+    if (sum === x)
+      c = true;
+    else
+      c = false;
+
+    return c;
+  }
+  console.log(isNarcissistic(number));
+</script>
+
+<script id="narcissistics">
+  function isNarcissistic(x) {
+    let count = 0;
+    let sum = 0;
+    let n = x;
+    while (n) {
+      count++;
+      n = parseInt(n / 10);
+    }
+    n = x;
+    for (let i = 0; i < count; i++) {
+      sum += Math.pow(n % 10, count);
+      n = parseInt(n / 10);
+    }
+    let c;
+    if (sum === x)
+      c = true;
+    else
+      c = false;
+
+    return c;
+  }
+
+  for (let i = 100; i < 10000; i++) {
+    if (isNarcissistic(i))
+      console.log(i);
+  }
+</script>
+
+<script id="palindrom">
+  function isPalindrom(x) {
+    let sum = 0;
+    let n = x;
+    let t;
+    while (n) {
+      t = n % 10;
+      sum = 10 * sum + t;
+      n = parseInt(n / 10);
+    }
+    let c
+    if (sum === x)
+      c = true;
+    else
+      c = false;
+
+    return c;
+  }
+
+  console.log(isPalindrom(+prompt()));
+</script>
+
+<script id="weekday">
+  function weekday(year, month) {
+    let sum = 0;
+    for (let i = 1; i < year; i++) {
+      if (i % 400 == 0 || i % 4 == 0 && i % 100 != 0) {
+        sum += 366;
+      }
+      else
+        sum += 365;
+    }
+    for (let i = 1; i < month; i++) {
+      switch (i) {
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 10:
+        case 12: sum += 31; break;
+        case 4:
+        case 6:
+        case 9:
+        case 11: sum += 30; break;
+        case 2: if (year % 400 == 0 || year % 4 == 0 && year % 100 != 0) {
+          sum += 29;
+        }
+        else
+          sum += 28;
+          break;
+        default: return "月份输入错误";
+      }
+    }
+    return ((sum + 1) % 7);
+  }
+
+  console.log(weekday(+prompt(), +prompt()));
+</script>
+
+<script id="complete-number">
+  function isCompleteNumber(x) {
+    let sum = 1;
+    let a = Math.sqrt(x);
+    for (let i = 2; i <= a; i++) {
+      if (x % i == 0) {
+        sum += (i + x / i);
+      }
+    }
+    let j;
+    if (sum == x)
+      j = true;
+    else
+      j = false;
+
+    return j;
+  }
+  console.log(isCompleteNumber(+prompt()));
+</script>
+
+<script id="complete-numbers">
+  function isCompleteNumber(x) {
+    let sum = 1;
+    let a = Math.sqrt(x);
+    for (let i = 2; i <= a; i++) {
+      if (x % i == 0) {
+        sum += (i + x / i);
+      }
+    }
+    let j;
+    if (sum == x)
+      j = true;
+    else
+      j = false;
+
+    return j;
+  }
+
+  for (let i = 2; i < 1000; i++) {
+    if (isCompleteNumber(i))
+      console.log(i);
+  }
+</script>
+
+<script id="prime">
+  function isPrime(x) {
+    let a = Math.sqrt(x);
+    let isprime = true;
+    for (let i = 2; i <= a; i++) {
+      if (x % i == 0) {
+        isprime = false;
+        break;
+      }
+    }
+    if (x == 1)
+      isprime = false;
+
+    return isprime;
+  }
+
+  console.log(isPrime(+prompt()));
+</script>
+
+<script id="primes">
+  function isPrime(x) {
+    let a = Math.sqrt(x);
+    let isprime = true;
+    for (let i = 2; i <= a; i++) {
+      if (x % i == 0) {
+        isprime = false;
+        break;
+      }
+    }
+    if (x == 1)
+      isprime = false;
+
+    return isprime;
+  }
+
+  for (let i = 1; i < 1000; i++) {
+    if (isPrime(i))
+      console.log(i);
+  }
+</script>
+
+<script id="lcf&lcm">
+  function lcf(x, y) {
+    let big, small;
+    let c;
+    if (x > y) {
+      big = x;
+      small = y;
+    }
+    else {
+      big = y;
+      small = x;
+    }
+
+    c = big % small;
+    while (c) {
+      big = small;
+      small = c;
+      c = big % small;
+    }
+
+    return small;
+  }
+  let x, y;
+  x = +prompt();
+  y = +prompt();
+  let l = lcf(x, y);
+  console.log(l, x * y / l);
+</script>
+
+<script id="sqrt">
+  function sqrt(a) {
+    let low, high, mid;
+    if (a == 1 || a == 0) {
+      return a;
+    }
+    else if (a > 1) {
+      low = 0;
+      high = a;
+    }
+    else if (a > 0 && a < 1) {
+      low = a;
+      high = 1;
+    }
+    mid = (low + high) / 2;
+    while (Math.abs(mid * mid - a) > 1e-6) {
+      if (mid * mid > a) {
+        high = mid;
+        mid = (low + high) / 2;
+      }
+      else {
+        low = mid;
+        mid = (low + high) / 2;
+      }
+    }
+
+    return mid;
+  }
+
+  console.log(sqrt(+prompt()));
+
+</script>
