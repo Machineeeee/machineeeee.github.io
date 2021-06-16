@@ -1157,9 +1157,9 @@ var sum = 0;
     }
     let c;
     if (sum === x)
-      c = true;
+      c = "YES";
     else
-      c = false;
+      c = "NO";
 
     return c;
   }
@@ -1182,9 +1182,9 @@ var sum = 0;
     }
     let c;
     if (sum === x)
-      c = true;
+      c = "YES";
     else
-      c = false;
+      c = "NO";
 
     return c;
   }
@@ -1207,9 +1207,9 @@ var sum = 0;
     }
     let c
     if (sum === x)
-      c = true;
+      c = "YES";
     else
-      c = false;
+      c = "NO";
 
     return c;
   }
@@ -1266,9 +1266,9 @@ var sum = 0;
     }
     let j;
     if (sum == x)
-      j = true;
+      j = "YES";
     else
-      j = false;
+      j = "NO";
 
     return j;
   }
@@ -1286,9 +1286,9 @@ var sum = 0;
     }
     let j;
     if (sum == x)
-      j = true;
+      j = "YES";
     else
-      j = false;
+      j = "NO";
 
     return j;
   }
@@ -1302,15 +1302,15 @@ var sum = 0;
 <script id="prime">
   function isPrime(x) {
     let a = Math.sqrt(x);
-    let isprime = true;
+    let isprime = "YES";
     for (let i = 2; i <= a; i++) {
       if (x % i == 0) {
-        isprime = false;
+        isprime = "NO";
         break;
       }
     }
     if (x == 1)
-      isprime = false;
+      isprime = "NO";
 
     return isprime;
   }
@@ -1321,20 +1321,20 @@ var sum = 0;
 <script id="primes">
   function isPrime(x) {
     let a = Math.sqrt(x);
-    let isprime = true;
+    let isprime = "YES";
     for (let i = 2; i <= a; i++) {
       if (x % i == 0) {
-        isprime = false;
+        isprime = "NO";
         break;
       }
     }
     if (x == 1)
-      isprime = false;
+      isprime = "NO";
 
     return isprime;
   }
 
-  for (let i = 1; i < 1000; i++) {
+    for (let i = 1; i < 100; i++) {
     if (isPrime(i))
       console.log(i);
   }
@@ -1366,7 +1366,7 @@ var sum = 0;
   x = +prompt();
   y = +prompt();
   let l = lcf(x, y);
-  console.log(l, x * y / l);
+    console.log(x * y / l, l);
 </script>
 
 <script id="sqrt">
@@ -1398,6 +1398,6 @@ var sum = 0;
     return mid;
   }
 
-  console.log(sqrt(+prompt()));
+    console.log(sqrt(+prompt()).toFixed(3));
 
 </script>
