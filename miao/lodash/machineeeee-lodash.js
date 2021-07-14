@@ -104,4 +104,4 @@ var machineeeee = function () {
     flatten: flatten,
     flattenDeep: flattenDeep,
   }
-}
+}();
