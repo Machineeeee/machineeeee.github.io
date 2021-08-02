@@ -1,107 +1,53 @@
 var machineeeee = function () {
-  function chunk(arr, size = 1) {
-    let arrPlus = [];
-    for (let i = 0; i < arr.length;) {
-      let t = [];
-      for (let j = 0; j < size && i < arr.length; j++) {
-        t[j] = arr[i++];
+  function isArguments(value) {
+    return typeof value.callee === "function"
+  }
+  function isArray(value) {
+    return value.__proto__ === Array.prototype;
+  }
+
+  function isArrayBuffer(value) {
+    return value.__proto__ === ArrayBuffer.prototype;
+  }
+
+  function isArrayLikeObject(value) {
+    return typeof value === "object" && value.length != undefined;
+  }
+
+  function isBoolean(value) {
+    return typeof value == "boolean";
+  }
+
+  function isBuffer(value) {
+    return value.__proto__ === Buffer.prototype;
+  }
+
+  function isDate(value) {
+    return value.__proto__ === Date.prototype;
+  }
+
+  function isEmpty(value) {
+    if (typeof value === "object") {
+      let res = [];
+      for (const key in value) {
+        res.push(key);
       }
-      arrPlus.push(t);
+      return res.length > 0;
     }
-    return arrPlus;
+    else if (typeof value === "string")
+      return value.length > 0;
+    else
+      return true;
   }
-
-  function compact(arr) {
-    let arrPlus = arr.filter(item => item);
-    return arrPlus;
-  }
-
-  function concat(arr, ...arg) {
-    let arrPlus = [];
-    for (let i = 0; i < arr.length; i++) {
-      arrPlus.push(arr[i]);
-    }
-
-    for (let i = 0; i < arg.length; i++) {
-      if (Array.isArray(arg[i])) {
-        for (let j = 0; j < arg[i].length; j++) {
-          arrPlus.push(arg[i][j]);
-        }
-      }
-      else
-        arrPlus.push(arg[i]);
-    }
-
-    return arrPlus;
-  }
-
-  function drop(arr, n = 1) {
-    let arrPlus = [];
-    for (let i = n; i < arr.length; i++) {
-      arrPlus.push(arr[i]);
-    }
-    return arrPlus;
-  }
-
-  function dropRight(arr, n = 1) {
-    let arrPlus = [];
-    for (let i = 0; i < arr.length - n; i++) {
-      arrPlus.push(arr[i]);
-    }
-    return arrPlus;
-  }
-
-  function fill(array, value, start = 0, end = array.length) {
-    for (let i = start; i < end; i++) {
-      array[i] = value;
-    }
-    return array;
-  }
-
-  function difference(array, ...values) {
-    let arrPlus = [];
-    let arr = concat(...values);
-    for (let i = 0; i < array.length; i++) {
-      if (!arr.includes(array[i]))
-        arrPlus.push(array[i]);
-    }
-    return arrPlus;
-  }
-
-  function flatten(array) {
-    let arrPlus = [];
-    for (let i = 0; i < array.length; i++) {
-      if (Array.isArray(array[i])) {
-        for (let j = 0; j < array[i].length; j++)
-          arrPlus.push(array[i][j]);
-      }
-      else {
-        arrPlus.push(array[i]);
-      }
-    }
-    return arrPlus;
-  }
-
-  function flattenDeep(array) {
-    let arrPlus = [];
-    for (let i = 0; i < array.length; i++) {
-      if (Array.isArray(array[i]))
-        arrPlus = arrPlus.concat(flattenDeep(array[i]));
-      else
-        arrPlus.push(array[i]);
-    }
-    return arrPlus;
-  }
-
   return {
-    chunk: chunk,
-    compact: compact,
-    concat: concat,
-    drop: drop,
-    dropRight: dropRight,
-    fill: fill,
-    difference: difference,
-    flatten: flatten,
-    flattenDeep: flattenDeep,
+    isArguments: isArguments,
+    isArray: isArray,
+    isArrayBuffer: isArrayBuffer,
+    isArrayLikeObject: isArrayLikeObject,
+    isBoolean: isBoolean,
+    isBuffer: isBuffer,
+    isDate: isDate,
+    isEmpty: isEmpty,
+
   }
 }();
