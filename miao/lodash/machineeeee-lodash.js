@@ -15,7 +15,7 @@ var machineeeee = function () {
   }
 
   function isBoolean(value) {
-    return typeof value == "boolean";
+    return Object.prototype.toString.call(value) === "[object Boolean]"
   }
 
   function isBuffer(value) {
@@ -32,10 +32,10 @@ var machineeeee = function () {
       for (const key in value) {
         res.push(key);
       }
-      return res.length > 0;
+      return res.length <= 0;
     }
     else if (typeof value === "string")
-      return value.length > 0;
+      return value.length <= 0;
     else
       return true;
   }
@@ -49,11 +49,11 @@ var machineeeee = function () {
   }
 
   function isFinite(value) {
-    return !isNaN(value) && value != Infinity && value != -Infinity;
+    return isNumber(value) && value != Infinity && value != -Infinity;
   }
 
   function isFunction(value) {
-    return value.__proto__ === Function.prototype;
+    return typeof value === "function";
   }
 
   function isLength(value) {
@@ -66,7 +66,7 @@ var machineeeee = function () {
 
   function isNaN(value) {
     if (typeof value === "object") {
-      value = value.valueof();
+      value = value.valueOf();
     }
     return value !== value;
   }
