@@ -140,16 +140,25 @@ var machineeeee = function () {
     return value;
   }
 
+  function isPath(value) {
+    return includes(value, ".") || includes(value, "[") || includes(value, "]");
+  }
+
   function get(object, path, defaultValue = undefined) {
-    if (isString(path)) {
-      path = toPath(path);
+    if (isArray(path) || isPath(path)) {
+      if (isString(path)) {
+        path = toPath(path);
+      }
+      for (let i = path[0]; i < path.length; i++) {
+        if (object[i] == undefined)
+          return defaultValue;
+        object = object[i];
+      }
+      return object;
     }
-    for (let i = path[0]; i < path.length; i++) {
-      if (object[i] == undefined)
-        return defaultValue;
-      object = object[i];
+    else {
+      return object[path];
     }
-    return object;
   }
 
   function property(path) {
@@ -299,9 +308,134 @@ var machineeeee = function () {
       }
       return init;
     }
+  function every(collection, callback) {
+    callback = iteratee(callback);
+    for (const key in collection) {
+      if (!callback(collection[key], key, collection)) {
+        return false;
+      }
+    }
+    return true;
+  }
 
+  function some(collection, callback) {
+    callback = iteratee(callback);
+    for (const key in collection) {
+      if (callback(collection[key], key, collection)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
+  // 以下顺序开始刷lodash
+  function chunk(array, size = 1) {
+    if (size >= array.length)
+      return array;
+    let res = [];
+    for (let i = 0; i < array.length; i += size) {
+      res.push(array.slice(i, i + size));
+    }
+    return res;
+  }
+
+  function compact(array) {
+    return filter(array, Boolean);
+  }
+
+  function concat(array, ...args) {
+    let res = array.slice(0);
+    forEach(args, function (value) {
+      if (getType(value) == "array") {
+        forEach(value, function (cell) {
+          res.push(cell);
+        })
+      }
+      else {
+        res.push(value);
+      }
+    })
+    return res;
+  }
+
+  function difference(array, ...args) {
+    let group = concat([], ...args);
+    return filter(array, function (value) {
+      return includes(group, value) == false;
+    })
+  }
+
+  function differenceBy(array, ...args) {
+    let callback = iteratee(args.pop());
+    let group = concat([], ...args);
+    group = map(group, callback);
+    return filter(array, function (value) {
+      return includes(group, callback(value)) == false;
+    })
+  }
+
+  function differenceWith(array, ...args) {
+    let comparator = args.pop();
+    let group = concat([], ...args);
+    return filter(array, function (value) {
+      for (let i = 0; i < group.length; i++) {
+        if (comparator(value, group[i])) {
+          return false;
+        }
+      }
+      return true;
+    })
+  }
+
+  function drop(array, n = 1) {
+    if (n <= 0)
+      return array;
+    else {
+      return array.slice(n);
+    }
+  }
+
+  function dropRight(array, n = 1) {
+    if (n <= 0)
+      return array;
+    else if (n > array.length)
+      return [];
+    else {
+      return array.slice(0, array.length - n);
+    }
+  }
+
+  function dropRightWhile(array, predicate) {
+    predicate = iteratee(predicate);
+    for (var i = array.length - 1; i >= 0; i--) {
+      if (!predicate(array[i])) {
+        break;
+      }
+    }
+    return array.slice(0, i + 1);
+  }
+
+  function dropWhile(array, predicate) {
+    predicate = iteratee(predicate);
+    for (var i = 0; i < array.length; i++) {
+      if (!predicate(array[i])) {
+        break;
+      }
+    }
+    return array.slice(i);
+  }
   return {
+    chunk: chunk,
+    compact: compact,
+    concat: concat,
+    difference: difference,
+    differenceBy: differenceBy,
+    differenceWith: differenceWith,
+    drop: drop,
+    dropRight: dropRight,
+    dropRightWhile: dropRightWhile,
+    dropWhile: dropWhile,
+
     isArguments: isArguments,
     isArray: isArray,
     isArrayBuffer: isArrayBuffer,
@@ -344,9 +478,11 @@ var machineeeee = function () {
     indexOf: indexOf,
     includes: includes,
     get: get,
+    isPath: isPath,
     map: map,
     filter: filter,
     reduce: reduce,
+    every: every,
 
   }
 }();
