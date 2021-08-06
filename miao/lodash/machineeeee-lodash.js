@@ -255,6 +255,7 @@ var machineeeee = function () {
       }
       return false;
     }
+  }
 
     function forEach(collection, func = identity) {
       for (const key in collection) {
