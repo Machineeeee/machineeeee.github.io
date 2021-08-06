@@ -1,4 +1,11 @@
 var machineeeee = function () {
+  //以下部分为 判断类的方法
+  function getType(obj) {
+    if (typeof obj === "object") {
+      return Object.prototype.toString.call(obj).match(/\b[A-Z][a-z]+\b/)[0].toLowerCase();
+    }
+    return typeof obj;
+  }
   function isArguments(value) {
     return typeof value.callee === "function"
   }
@@ -40,16 +47,16 @@ var machineeeee = function () {
       return true;
   }
 
+  function isFinite(value) {
+    return isNumber(value) && value != Infinity && value != -Infinity;
+  }
+
   function isInteger(value) {
     return isFinite(value) && parseInt(value) == value;
   }
 
   function isError(value) {
     return typeof value == "object" && value.__proto__ == Error.prototype;
-  }
-
-  function isFinite(value) {
-    return isNumber(value) && value != Infinity && value != -Infinity;
   }
 
   function isFunction(value) {
@@ -125,6 +132,174 @@ var machineeeee = function () {
   function isWeakSet(value) {
     return Object.prototype.toString.call(value) === "[object WeakSet]";
   }
+
+  //以下部分为迭代方法,和一些辅助方法
+  function toPath(value) {
+    let reg = /\w+/g;
+    value = value.match(reg);
+    return value;
+  }
+
+  function get(object, path, defaultValue = undefined) {
+    if (isString(path)) {
+      path = toPath(path);
+    }
+    for (let i = path[0]; i < path.length; i++) {
+      if (object[i] == undefined)
+        return defaultValue;
+      object = object[i];
+    }
+    return object;
+  }
+
+  function property(path) {
+    return function (obj) {
+      return get(obj, path);
+    }
+  }
+
+  function isMatch(object, source) {
+    if (isObject(source)) {
+      for (const key in source) {
+        if (isObject(object[key])) {
+          if (!isEqual(object[key], source[key])) {
+            return false;
+          };
+        }
+        else if (object[key] != source[key]) {
+          return false;
+        }
+      }
+      return true;
+    }
+    return false;
+  }
+
+  function matches(source) {
+    return function (obj) {
+      return isMatch(obj, source);
+    }
+  }
+
+  function matchesProperty(path, srcValue) {
+    return function (obj) {
+      return get(obj, path) === srcValue;
+    }
+  }
+
+  function iteratee(value) {
+    if (getType(value) === "function")
+      return value;
+    if (getType(value) === "string") {
+      return property(value);
+    }
+    if (getType(value) === "array") {
+      return matchesProperty(...value);
+    }
+    if (getType(value) === "object") {
+      return matches(value);
+    }
+  }
+
+  function size(value) {
+    if (Object.prototype.toString.call(value) === '[object Object]') {
+      let count = 0;
+      for (const key in value) {
+        count++;
+      }
+      return count;
+    }
+    return value.length;
+  }
+
+  function isEqual(value, other) {
+    if (value === other)
+      return true;
+    if (isNaN(value) && isNaN(other))
+      return true;
+    if (isObject(value) && isObject(other)) {
+      if (Object.prototype.toString.call(value) === Object.prototype.toString.call(other) && size(value) === size(other)) {
+        for (const key in value) {
+          if (!isEqual(value[key], other[key]))
+            return false;
+        }
+        return true;
+      }
+      return false;
+    }
+    return false;
+  }
+
+  function identity(value) {
+    return value;
+  }
+
+  function indexOf(array, value, fromIndex = 0) {
+    if (fromIndex < 0)
+      fromIndex = fromIndex + array.length;
+    for (let i = fromIndex; i < array.length; i++) {
+      if (isEqual(array[i], value))
+        return i;
+    }
+    return -1;
+  }
+
+  function includes(collection, value, fromIndex = 0) {
+    if (getType(collection) === "string") {
+      collection = collection.split("");
+    }
+    if (getType(collection) === "object" || getType(collection) === "array") {
+      for (const key in collection) {
+        if (isEqual(collection[key], value))
+          return true;
+      }
+      return false;
+    }
+
+    function forEach(collection, func = identity) {
+      for (const key in collection) {
+        if (func(collection[key], key, collection) === false)
+          break;
+      }
+      return collection;
+    }
+
+    function map(collection, callback) {
+      callback = iteratee(callback);
+      let res = [];
+      for (const key in collection) {
+        res.push(callback(collection[key], key, collection));
+      }
+      return res;
+    }
+
+    function filter(collection, callback) {
+      callback = iteratee(callback);
+      let res = [];
+      for (const key in collection) {
+        if (callback(collection[key], key, collection)) {
+          res.push(collection[key]);
+        }
+      }
+      return res;
+    }
+
+    function reduce(collection, callback, init) {
+      callback = iteratee(callback);
+      let count = 0;
+      for (const key in collection) {
+        if (count == 0 && init == undefined) {
+          init = collection[key];
+        }
+        else {
+          init = callback(init, collection[key], key, collection)
+          count++;
+        }
+      }
+      return init;
+    }
+
+
   return {
     isArguments: isArguments,
     isArray: isArray,
@@ -155,5 +330,22 @@ var machineeeee = function () {
     isUndefined: isUndefined,
     isWeakMap: isWeakMap,
     isWeakSet: isWeakSet,
+    toPath: toPath,
+    property: property,
+    isMatch: isMatch,
+    matches: matches,
+    size: size,
+    isEqual: isEqual,
+    iteratee: iteratee,
+    identity: identity,
+    matchesProperty: matchesProperty,
+    forEach: forEach,
+    indexOf: indexOf,
+    includes: includes,
+    get: get,
+    map: map,
+    filter: filter,
+    reduce: reduce,
+
   }
 }();
