@@ -254,12 +254,21 @@ var machineeeee = function () {
   }
 
   function includes(collection, value, fromIndex = 0) {
+    let start = fromIndex >= 0 ? fromIndex : collection.length + fromIndex;
     if (getType(collection) === "string") {
-      collection = collection.split("");
+      return collection.includes(value, start);
     }
-    if (getType(collection) === "object" || getType(collection) === "array") {
+    if (getType(collection) === "object") {
       for (const key in collection) {
         if (isEqual(collection[key], value))
+          return true;
+      }
+      return false;
+    }
+
+    if (getType(collection) === "array") {
+      for (let i = start; i < collection.length; i++) {
+        if (isEqual(collection[i], value))
           return true;
       }
       return false;
@@ -424,6 +433,199 @@ var machineeeee = function () {
     }
     return array.slice(i);
   }
+
+  function fill(array, value, start = 0, end = array.length) {
+    for (let i = start; i < end; i++) {
+      array[i] = value;
+    }
+    return array;
+  }
+
+  function findIndex(array, predicate, fromIndex = 0) {
+    predicate = iteratee(predicate);
+    let start = fromIndex >= 0 ? fromIndex : array.length + fromIndex;
+    for (let i = start; i < array.length; i++) {
+      if (predicate(array[i])) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  function findLastIndex(array, predicate, fromIndex = array.length - 1) {
+    predicate = iteratee(predicate);
+    let start = fromIndex;
+    for (let i = start; i >= 0; i--) {
+      if (predicate(array[i])) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  function head(array) {
+    return array[0];
+  }
+
+  function flatten(array) {
+    return reduce(array, function (res, value) {
+      return concat(res, value);
+    }, [])
+  }
+
+  function flattenDeep(array) {
+    for (let i = 0; i < array.length; i++) {
+      if (isArray(array[i])) {
+        return flattenDeep(flatten(array));
+      }
+    }
+    return array;
+  }
+
+  function flattenDepth(array, depth = 1) {
+    for (let i = 0; i < depth; i++) {
+      array = flatten(array);
+    }
+    return array;
+  }
+
+  function fromPairs(pairs) {
+    let res = {};
+    if (pairs.length == 2 && !isArray(pairs[0])) {
+      res[pairs[0]] = pairs[1];
+      return res;
+    }
+    forEach(pairs, function (value) {
+      res[value[0]] = value[1];
+    })
+    return res;
+  }
+
+  function initial(array) {
+    return array.slice(0, array.length - 1);
+  }
+
+  function intersection(...array) {
+    let firstArray = array[0];
+    array = array.slice(1);
+    return filter(firstArray, function (value) {
+      return every(array, function (cell) {
+        return includes(cell, value)
+      })
+    })
+  }
+
+  function intersectionBy(...arys) {
+    let predicate = iteratee(arys.pop());
+    let firstArray = arys[0];
+    arys = arys.slice(1);
+    return filter(firstArray, function (value) {
+      return every(arys, function (cell) {
+        cell = map(cell, predicate);
+        return includes(cell, predicate(value));
+      })
+    })
+  }
+
+  function intersectionWith(...arys) {
+    let comparator = arys.pop();
+    let firstArray = arys[0];
+    arys = arys.slice(1);
+    return filter(firstArray, function (value) {
+      return every(arys, function (arr) {
+        return some(arr, function (cell) {
+          return comparator(value, cell);
+        })
+      })
+    })
+  }
+
+  function join(array, separator = ',') {
+    let str = "";
+    for (let i = 0; i < array.length; i++) {
+      str += array[i];
+      if (i != array.length - 1) {
+        str += separator;
+      }
+    }
+    return str;
+  }
+
+  function last(array) {
+    return array[array.length - 1];
+  }
+
+  function lastIndexOf(array, value, fromIndex = array.length - 1) {
+    if (fromIndex < 0)
+      fromIndex = fromIndex + array.length;
+    for (let i = fromIndex; i >= 0; i--) {
+      if (isEqual(array[i], value))
+        return i;
+    }
+    return -1;
+  }
+
+  function nth(array, n = 0) {
+    if (n < 0) {
+      n = n + array.length;
+    }
+    return array[n];
+  }
+
+  function pull(array, ...values) {
+    forEach(values, function (val) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i] == val) {
+          array.splice(i, 1);
+          i--;
+        }
+      }
+    })
+    return array;
+  }
+
+  function pullAll(array, values) {
+    return pull(array, ...values);
+  }
+
+  function pullAllBy(array, values, callback) {
+    callback = iteratee(callback);
+    values = map(values, callback);
+    forEach(values, function (val) {
+      for (let i = 0; i < array.length; i++) {
+        if (callback(array[i]) == val) {
+          array.splice(i, 1);
+          i--;
+        }
+      }
+    })
+    return array;
+  }
+
+  function pullAllWith(array, values, comparator) {
+    forEach(values, function (val) {
+      for (let i = 0; i < array.length; i++) {
+        if (comparator(array[i], val)) {
+          array.splice(i, 1);
+          i--;
+        }
+      }
+    })
+    return array;
+  }
+
+  function pullAt(array, ...indexes) {
+    let res = [];
+    forEach(array, function (value, idx, array) {
+      if (includes(indexes, +idx)) {
+        res.push(value);
+        array[idx] = undefined;
+      }
+    })
+    pull(array, undefined);
+    return res;
+  }
+
   return {
     chunk: chunk,
     compact: compact,
@@ -435,6 +637,27 @@ var machineeeee = function () {
     dropRight: dropRight,
     dropRightWhile: dropRightWhile,
     dropWhile: dropWhile,
+    fill: fill,
+    findIndex: findIndex,
+    findLastIndex: findLastIndex,
+    head: head,
+    flatten: flatten,
+    flattenDeep: flattenDeep,
+    flattenDepth: flattenDepth,
+    fromPairs: fromPairs,
+    initial: initial,
+    intersection: intersection,
+    intersectionBy: intersectionBy,
+    intersectionWith: intersectionWith,
+    join: join,
+    last: last,
+    lastIndexOf: lastIndexOf,
+    nth: nth,
+    pull: pull,
+    pullAll: pullAll,
+    pullAllBy: pullAllBy,
+    pullAllWith: pullAllWith,
+    pullAt: pullAt,
 
     isArguments: isArguments,
     isArray: isArray,
