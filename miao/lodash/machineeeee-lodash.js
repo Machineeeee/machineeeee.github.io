@@ -149,10 +149,10 @@ var machineeeee = function () {
       if (isString(path)) {
         path = toPath(path);
       }
-      for (let i = path[0]; i < path.length; i++) {
-        if (object[i] == undefined)
+      for (let i = 0; i < path.length; i++) {
+        if (object[path[i]] == undefined)
           return defaultValue;
-        object = object[i];
+        object = object[path[i]];
       }
       return object;
     }
@@ -375,6 +375,8 @@ var machineeeee = function () {
   }
 
   function differenceBy(array, ...args) {
+    if (isArray(args[args.length - 1]))
+      return difference(array, ...args);
     let callback = iteratee(args.pop());
     let group = concat([], ...args);
     group = map(group, callback);
@@ -626,7 +628,244 @@ var machineeeee = function () {
     return res;
   }
 
+  function remove(array, predicate) {
+    predicate = iteratee(predicate);
+    let res = [];
+    for (let i = 0; i < array.length; i++) {
+      if (predicate(array[i])) {
+        res.push(array[i]);
+        array.splice(i--, 1);
+      }
+    }
+    return res;
+  }
+
+  function reverse(array) {
+    let i = 0;
+    let j = array.length - 1;
+    while (i < j) {
+      [array[i], array[j]] = [array[j], array[i]];
+      i++;
+      j--;
+    }
+    return array;
+  }
+
+  function sortedIndex(array, value) {
+    let index = array.length;
+    forEach(array, function (val, idx) {
+      if (value <= val) {
+        index = idx;
+        return false;
+      }
+    })
+    return index;
+  }
+
+  function sortedIndexBy(array, value, callback) {
+    callback = iteratee(callback);
+    return sortedIndex(map(array, callback), callback(value));
+  }
+
+  function sortedIndexOf(array, value) {
+    let index = -1;
+    forEach(array, function (val, idx) {
+      if (val === value) {
+        index = idx;
+        return false;
+      }
+    })
+    return index;
+  }
+
+  function sortedLastIndex(array, value) {
+    for (let i = array.length - 1; i >= 0; i--) {
+      if (array[i] <= value) {
+        return i + 1;
+      }
+    }
+    return 0;
+  }
+
+  function sortedLastIndexBy(array, value, callback) {
+    callback = iteratee(callback);
+    return sortedLastIndex(map(array, callback), callback(value));
+  }
+
+  function sortedLastIndexOf(array, value) {
+    let low = 0;
+    let high = array.length - 1;
+    while (low <= high) {
+      let mid = (low + high) >> 1;
+      if (array[mid] <= value) {
+        low = mid + 1;
+      }
+      else {
+        high = mid - 1
+      }
+    }
+    return array[high] === value ? high : -1;
+  }
+
+  function sortedUniq(array) {
+    return Array.from(new Set(array));
+  }
+
+  function sortedUniqBy(array, callback) {
+    callback = iteratee(callback);
+    let temp = sortedUniq(map(array, callback));
+    let i = 0;
+    return filter(array, function (val) {
+      if (callback(val) === temp[i]) {
+        i++;
+        return true;
+      }
+      return false;
+    })
+  }
+
+  function tail(array) {
+    return array.slice(1);
+  }
+
+  function take(array, n = 1) {
+    return array.slice(0, n);
+  }
+
+  function takeRight(array, n = 1) {
+    return n > array.length ? array : array.slice(array.length - n);
+  }
+
+  function takeRightWhile(array, predicate) {
+    predicate = iteratee(predicate);
+    for (var i = array.length - 1; i >= 0; i--) {
+      if (!predicate(array[i])) {
+        break;
+      }
+    }
+    return takeRight(array, array.length - 1 - i);
+  }
+
+  function takeWhile(array, predicate) {
+    predicate = iteratee(predicate);
+    for (var i = 0; i < array.length; i++) {
+      if (!predicate(array[i])) {
+        break;
+      }
+    }
+    return take(array, i);
+  }
+
+  function union(...args) {
+    return Array.from(new Set(concat(...args)));
+  }
+
+  function unionBy(...args) {
+    let callback = iteratee(args.pop());
+    args = concat(...args);
+    let temp = union(map(args, callback));
+    let i = 0;
+    return filter(args, function (val) {
+      if (callback(val) == temp[i++]) {
+        return true;
+      }
+      return false;
+    })
+  }
+
+  function unionWith(...args) {
+    let comparator = args.pop();
+    let res = [];
+    forEach(concat(...args), function (val) {
+      let flag = 1;
+      forEach(res, function (cell) {
+        if (comparator(val, cell)) {
+          flag = 0;
+          return false;
+        }
+      })
+      if (flag) {
+        res.push(val);
+      }
+    })
+    return res;
+  }
+
+  function uniq(array) {
+    return Array.from(new Set(array));
+  }
+
+  function uniqBy(array, callback) {
+    callback = iteratee(callback)
+    let temp = uniq(map(array, callback));
+    let i = 0;
+    return filter(array, function (val) {
+      if (callback(val) == temp[i++])
+        return true;
+      return false;
+    })
+  }
+
+  function uniqWith(array, comparator) {
+    let res = [];
+    forEach(array, function (val) {
+      let flag = 1;
+      forEach(res, function (cell) {
+        if (comparator(val, cell)) {
+          flag = 0;
+          return false;
+        }
+      })
+      if (flag) {
+        res.push(val);
+      }
+    })
+    return res;
+  }
+
+  function unzip(array) {
+    return map(array[0], function (val, idx) {
+      return map(array, function (cell) {
+        return cell[idx];
+      })
+    })
+  }
+
+  function unzipWith(array, callback) {
+    return map(unzip(array), cell => {
+      return reduce(cell, callback);
+    })
+  }
+
+  function add(augend, addend) {
+    return augend + addend;
+  }
   return {
+    unzip: unzip,
+    add: add,
+    unzipWith: unzipWith,
+
+    union: union,
+    unionBy: unionBy,
+    unionWith: unionWith,
+    uniq: uniq,
+    uniqBy: uniqBy,
+    uniqWith: uniqWith,
+    tail: tail,
+    take: take,
+    takeRight: takeRight,
+    takeRightWhile: takeRightWhile,
+    takeWhile: takeWhile,
+    sortedIndex: sortedIndex,
+    sortedIndexBy: sortedIndexBy,
+    sortedIndexOf: sortedIndexOf,
+    sortedLastIndex: sortedLastIndex,
+    sortedLastIndexBy: sortedLastIndexBy,
+    sortedLastIndexOf: sortedLastIndexOf,
+    sortedUniq: sortedUniq,
+    sortedUniqBy: sortedUniqBy,
+    reverse: reverse,
+    remove: remove,
     chunk: chunk,
     compact: compact,
     concat: concat,
@@ -658,7 +897,6 @@ var machineeeee = function () {
     pullAllBy: pullAllBy,
     pullAllWith: pullAllWith,
     pullAt: pullAt,
-
     isArguments: isArguments,
     isArray: isArray,
     isArrayBuffer: isArrayBuffer,
