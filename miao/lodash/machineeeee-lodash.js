@@ -659,7 +659,7 @@ var machineeeee = function () {
         return false;
       }
     })
-    return index;
+    return +index;
   }
 
   function sortedIndexBy(array, value, callback) {
@@ -675,7 +675,7 @@ var machineeeee = function () {
         return false;
       }
     })
-    return index;
+    return +index;
   }
 
   function sortedLastIndex(array, value) {
@@ -840,11 +840,125 @@ var machineeeee = function () {
   function add(augend, addend) {
     return augend + addend;
   }
+
+  function without(array, ...args) {
+    return filter(array, function (val) {
+      return !includes(args, val);
+    })
+  }
+
+  function xor(...args) {
+    let arr = concat(...args);
+    let m = new Map();
+    forEach(arr, val => {
+      if (m.has(val)) {
+        m.set(val, m.get(val) + 1);
+      }
+      else {
+        m.set(val, 1);
+      }
+    })
+    return filter(arr, val => {
+      return m.get(val) == 1 ? true : false;
+    })
+  }
+
+  function xorBy(...args) {
+    let callback = iteratee(args.pop());
+    let arr = concat(...args);
+    let m = new Map();
+    forEach(arr, val => {
+      val = callback(val);
+      if (m.has(val)) {
+        m.set(val, m.get(val) + 1);
+      }
+      else {
+        m.set(val, 1);
+      }
+    })
+    return filter(arr, val => {
+      return m.get(callback(val)) == 1 ? true : false;
+    })
+  }
+
+  function xorWith(...args) {
+    let comparator = args.pop();
+    let arr = concat(...args);
+    let err = [];
+    return filter(arr, (val, idx) => {
+      for (let i = idx + 1; i < arr.length; i++) {
+        if (comparator(val, arr[i])) {
+          err.push(val);
+          return false;
+        }
+      }
+      for (let i = 0; i < err.length; i++) {
+        if (comparator(err[i], val)) {
+          return false;
+        }
+      }
+      return true;
+    })
+  }
+
+  function zip(...args) {
+    return map(args[0], (val, idx) => {
+      return map(args, cell => cell[idx]);
+    })
+  }
+
+  function zipObject(props, values) {
+    let res = new Object();
+    forEach(props, (val, idx) => {
+      res[val] = values[idx];
+    })
+    return res;
+  }
+
+  function zipObjectDeep(props, values) {
+    let res = new Object();
+    forEach(props, (val, idx) => {
+      let n = res;
+      if (isPath(val)) {
+        let path = toPath(val);
+        for (let i = 0; i < path.length; i++) {
+          if (i == path.length - 1) {
+            n[path[i]] = values[idx];
+          }
+          else if (isNaN(+path[i + 1]) && n[path[i]] == undefined) {
+            n[path[i]] = new Object();
+          }
+          else if (!isNaN(+path[i + 1]) && n[path[i]] == undefined) {
+            n[path[i]] = new Array();
+          }
+          n = n[path[i]];
+        }
+      }
+      else {
+        res[val] = values[idx];
+      }
+    })
+    return res;
+  }
+
+  function zipWith(...args) {
+    let callback = iteratee(args.pop());
+    return map(zip(...args), cell => {
+      return callback(...cell);
+    })
+  }
   return {
+    zipObjectDeep: zipObjectDeep,
+    zipObject: zipObject,
+    zip: zip,
+    zipWith: zipWith,
     unzip: unzip,
     add: add,
     unzipWith: unzipWith,
-
+    without: without,
+    xor: xor,
+    xorBy: xorBy,
+    xorWith: xorWith,
     union: union,
     unionBy: unionBy,
     unionWith: unionWith,
