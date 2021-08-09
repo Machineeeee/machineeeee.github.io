@@ -283,6 +283,13 @@ var machineeeee = function () {
       return collection;
     }
 
+  function forEachRight(collection, func = identity) {
+    for (let i = collection.length - 1; i >= 0; i--) {
+      if (func(collection[i], i, collection) === false)
+        break;
+    }
+    return collection;
+  }
     function map(collection, callback) {
       callback = iteratee(callback);
       let res = [];
@@ -317,6 +324,20 @@ var machineeeee = function () {
       }
       return init;
     }
+
+  function reduceRight(collection, callback, init) {
+    callback = iteratee(callback);
+    for (let i = collection.length - 1; i >= 0; i--) {
+      if (i == collection.length - 1 && init == undefined) {
+        init = collection[i];
+      }
+      else {
+        init = callback(init, collection[i], i, collection)
+      }
+    }
+    return init;
+  }
+
   function every(collection, callback) {
     callback = iteratee(callback);
     for (const key in collection) {
@@ -947,7 +968,166 @@ var machineeeee = function () {
       return callback(...cell);
     })
   }
+
+  function countBy(collection, callback) {
+    callback = iteratee(callback);
+    let m = new Map();
+    for (const key in collection) {
+      let n = callback(collection[key]);
+      if (m.has(n)) {
+        m.set(n, m.get(n) + 1);
+      }
+      else {
+        m.set(n, 1);
+      }
+    }
+    let res = new Object();
+    for (const key of m.keys()) {
+      res[key] = m.get(key);
+    }
+    return res;
+  }
+
+  function find(collection, predicate, fromIndex = 0) {
+    predicate = iteratee(predicate);
+    for (let i = fromIndex; i < collection.length - 1; i++) {
+      if (predicate(collection[i], i, collection)) {
+        return collection[i];
+      }
+    }
+    return undefined;
+  }
+
+  function findLast(collection, predicate, fromIndex = collection.length - 1) {
+    predicate = iteratee(predicate);
+    for (let i = fromIndex; i >= 0; i--) {
+      if (predicate(collection[i], i, collection)) {
+        return collection[i];
+      }
+    }
+    return undefined;
+  }
+
+  function flatMap(collection, callback) {
+    return concat(...map(collection, callback));
+  }
+
+  function flatMapDeep(collection, callback) {
+    return flattenDeep(map(collection, callback));
+  }
+
+  function flatMapDepth(collection, callback, depth = 1) {
+    return flattenDepth(map(collection, callback), depth);
+  }
+
+  function groupBy(collection, callback) {
+    callback = iteratee(callback);
+    let res = {};
+    forEach(Array.from(new Set(map(collection, callback))), val => {
+      res[val] = filter(collection, item => callback(item) === val)
+    })
+    return res;
+  }
+
+  function invokeMap(collection, path, ...args) {
+    if (isString(path)) {
+      return collection.map(val => val[path](...args));
+    }
+    else if (isFunction(path)) {
+      return collection.map(val => path.call(val, ...args));
+    }
+  }
+
+  function keyBy(collection, callback) {
+    let res = {};
+    forEach(map(collection, callback), (val, idx) => {
+      res[val] = collection[idx];
+    })
+    return res;
+  }
+
+  function orderBy(collection, callbacks, orders) {
+    forEachRight(callbacks, (val, idx) => {
+      if (orders[idx] === "desc") {
+        collection = collection.sort((a, b) => {
+          return iteratee(val)(a) < iteratee(val)(b) ? 1 : -1;
+        })
+      }
+      else {
+        collection = collection.sort((a, b) => {
+          return iteratee(val)(a) >= iteratee(val)(b) ? 1 : -1;
+        })
+      }
+    })
+    return collection;
+  }
+
+  function partition(collection, predicate) {
+    predicate = iteratee(predicate);
+    let res = [];
+    res[0] = [];
+    res[1] = [];
+    forEach(collection, val => {
+      if (predicate(val)) {
+        res[0].push(val);
+      }
+      else {
+        res[1].push(val);
+      }
+    })
+    return res;
+  }
+
+  function isElement(value) {
+    return Object.prototype.toString.call(value) === "[object HTMLBodyElement]";
+  }
+
+  function isArrayLike(value) {
+    return getType(value) != "function" && isLength(value.length);
+  }
+
+  function isEqualWith(value, other, customizer) {
+    for (let i = 0; i < value.length; i++) {
+      if (customizer(value[i], other[i]) == false)
+        return false;
+    }
+    return true;
+  }
+
+  function isMatchWith(object, source, customizer) {
+    for (const key in source) {
+      if (customizer(source[key], object[key]) == false) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function isNative(value) {
+    return includes(Function.prototype.toString.call(val), "[native code]";
+  }
+
+  function isRegExp(value) {
+    return Object.prototype.toString.call(value) === "[object RegExp]";
+  }
   return {
+    isRegExp: isRegExp,
+    isNative: isNative,
+    isMatchWith: isMatchWith,
+    isEqualWith: isEqualWith,
+    isArrayLike: isArrayLike,
+    isElement: isElement,
+    partition: partition,
+    orderBy: orderBy,
+    keyBy: keyBy,
+    invokeMap: invokeMap,
+    groupBy: groupBy,
+    flatMapDepth: flatMapDepth,
+    flatMapDeep: flatMapDeep,
+    flatMap: flatMap,
+    findLast: findLast,
+    find: find,
+    countBy: countBy,
     zipObjectDeep: zipObjectDeep,
     zipObject: zipObject,
     zip: zip,
@@ -1050,6 +1230,7 @@ var machineeeee = function () {
     identity: identity,
     matchesProperty: matchesProperty,
     forEach: forEach,
+    forEachRight: forEachRight,
     indexOf: indexOf,
     includes: includes,
     get: get,
