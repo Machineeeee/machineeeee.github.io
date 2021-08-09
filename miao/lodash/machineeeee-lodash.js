@@ -1104,7 +1104,7 @@ var machineeeee = function () {
   }
 
   function isNative(value) {
-    return includes(Function.prototype.toString.call(val), "[native code]";
+    return includes(Function.prototype.toString.call(value), "[native code]");
   }
 
   function isRegExp(value) {
