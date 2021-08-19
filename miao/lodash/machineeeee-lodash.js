@@ -294,7 +294,7 @@ var machineeeee = function () {
       callback = iteratee(callback);
       let res = [];
       for (const key in collection) {
-        res.push(callback(collection[key], key, collection));
+        res.push(callback(collection[key], +key, collection));
       }
       return res;
     }
@@ -1110,6 +1110,8 @@ var machineeeee = function () {
   function isRegExp(value) {
     return Object.prototype.toString.call(value) === "[object RegExp]";
   }
+
+
   return {
     isRegExp: isRegExp,
     isNative: isNative,

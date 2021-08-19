@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Machine's paintBoard</title>
+  <link rel="shortcut icon" href="https://www.bilibili.com/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="p-iconfont.css">
+  <link rel="stylesheet" href="p2-iconfont.css">
+  <style>
+    body{
+      width: 1300px;
+      min-width: 1300px;
+      margin: 0 auto;
+      height: 100%;
+      position: relative;
+      background-color: rgb(210,220,234);
+      font-family: tahoma,"microsoft yahei","\5FAE\8F6F\96C5\9ED1";
+    }
+    main{
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      width: 1300px;
+      min-width: 1300px;
+      height: 98vh;
+      background-color: white;
+      left:50%;
+      transform:translate(-50%,0%); 
+    }
+    svg{
+      width: 100%;
+      flex-grow:1;
+    }
+    .head{
+      width: 100%;
+      height: 70px;
+      background-color: rgb(245,246,247);
+      display: flex;
+      flex-direction: row;
+      align-items:center;
+      justify-content:space-around;
+      border-bottom: 1px solid rgb(193, 195, 197);
+    }
+    .head > div{
+      display: flex;
+      flex-direction: row;
+    }
+    #draw>input{
+      display: none;
+    }
+    label:hover{
+      background-color: rgb(228,242,246);
+    }
+    #draw > input:checked + label{
+      background-color: rgb(220,237,254);
+      color: rgb(0,162,232);
+    }
+    label{
+      display: block;
+      width: 55px;
+      height:70px;
+      text-align: center;
+      line-height: 70px;
+      cursor: pointer;
+    }
+
+    #fill:checked + label{
+      background-color: rgb(220,237,254);
+      color: rgb(0,162,232);
+    }
+    #color-chose{
+      display: flex;
+      flex-direction: row;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      align-items:center;
+      align-content:center;
+      width: 226px;
+    }
+    #color-chose > span{
+      display: block;
+      width: 20px;
+      height: 20px;
+      border: 1px solid rgb(160,160,160);
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #color-chose > span:hover{
+      border-color: red;
+    }
+    #widthSize{
+      line-height: 70px;
+      width: 20px;
+    }
+    #pre,#next{
+      height: 70px;
+      line-height: 70px;
+      width: 40px;
+      cursor: pointer;
+    }
+    #pre:hover,#next:hover{
+      background-color: rgb(228,242,246);
+    }
+    #linewidth{
+      cursor: pointer;
+    }
+    #save{
+      width: 55px;
+      height: 70px;
+      line-height: 70px;
+      text-align: center;
+      cursor: pointer;
+    }
+    #save:hover{
+      background-color: rgb(228,242,246);
+      color: rgb(0,162,232);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="head">
+      <div class="save">
+        <span id="save" class="iconfont">&#xe546</span>
+      </div>
+      <div id="pn">
+        <span id="pre" class="iconfont">&#xe526</span>
+        <span id="next" class="iconfont">&#xe61c</span>
+      </div>
+      <div id="draw">
+        <input type="radio" name="tool" id="t-brush" checked>
+        <label for="t-brush" class="iconfont">&#xe630</label>
+        <input type="radio" name="tool" id="t-line">
+        <label for="t-line" class="iconfont">&#xe80a</label>
+        <input type="radio" name="tool" id="t-qline">
+        <label for="t-qline" class="iconfont">&#xe503</label>
+        <input type="radio" name="tool" id="t-circle">
+        <label for="t-circle" class="iconfont">&#xe80c</label>
+        <input type="radio" name="tool" id="t-qcircle">
+        <label for="t-qcircle" class="iconfont">&#xe791</label>
+        <input type="radio" name="tool" id="t-rec">
+        <label for="t-rec" class="iconfont">&#xe790</label>
+        <input type="radio" name="tool" id="t-eraser">
+        <label for="t-eraser" class="iconfont">&#xe612</label>
+      </div>
+      <div class="width-fill">
+        <input type="radio" name="fill" id="fill" style="display: none;">
+        <label for="fill" class="iconfont">&#xe613</label>
+        <input type="range" min="1" max="15" id="linewidth" value="2">
+        <span id="widthSize"></span>
+      </div>
+      <div class="color">
+        <input type="color"id="color1" style="visibility: hidden;width: 0;" value="#ED1C24">
+        <label for="color1" class="iconfont" >&#xe627</label>
+        <input type="color"id="color2" style="visibility: hidden; width: 0;" value="#3CCD82">
+        <label for="color2" class="iconfont" style="margin-left: -6px;">&#xe50a</label>
+        <div id="color-chose">
+          <span style="background-color: rgb(0,0,0);"></span>
+          <span style="background-color: rgb(127,127,127);"></span>
+          <span style="background-color: rgb(136,0,21);"></span>
+          <span style="background-color: rgb(237,28,36);"></span>
+          <span style="background-color: rgb(255,127,39);"></span>
+          <span style="background-color: rgb(255,242,0);"></span>
+          <span style="background-color: rgb(34,177,76);"></span>
+          <span style="background-color: rgb(0,162,232);"></span>
+          <span style="background-color: rgb(63,72,204);"></span>
+          <span style="background-color: rgb(163,73,164);"></span>
+          <span style="background-color: rgb(255,255,255);"></span>
+          <span style="background-color: rgb(195,195,195);"></span>
+          <span style="background-color: rgb(185,122,87);"></span>
+          <span style="background-color: rgb(255,174,201);"></span>
+          <span style="background-color: rgb(255,201,14);"></span>
+          <span style="background-color: rgb(239,228,176);"></span>
+          <span style="background-color: rgb(181,230,29);"></span>
+          <span style="background-color: rgb(153,217,234);"></span>
+          <span style="background-color: rgb(112,146,190);"></span>
+          <span style="background-color: rgb(200,191,231);"></span>
+        </div>
+      </div>
+    </div>
+    <svg></svg>
+  </main>
+</body>
+<script>
+  let svg = document.querySelector("svg");
+  let color1 = document.querySelector("#color1");
+  let color2 = document.querySelector("#color2");
+  let linewidth = document.querySelector("#linewidth");
+  let widthSize = document.querySelector("#widthSize");
+  widthSize.textContent = linewidth.value;
+  color1.nextElementSibling.style.color = color1.value;
+  color2.nextElementSibling.style.color = color2.value;
+  let pos;
+  let polyline,line,circle,ellipse,rect,path,flag = 0;
+  let points,point1,point2,point3;
+  let last = 0;
+  let prepos = {
+    x:0,
+    y:0,
+  };
+
+  let toolbrush = document.querySelector("#t-brush");
+  let toolline = document.querySelector("#t-line");
+  let toolqline = document.querySelector("#t-qline");
+  let toolcircle = document.querySelector("#t-circle");
+  let toolqcircle = document.querySelector("#t-qcircle");
+  let toolrec = document.querySelector("#t-rec");
+  let tooleraser = document.querySelector("#t-eraser");
+  svg.addEventListener("mousedown",function(e){
+    if(toolbrush.checked){
+      polyline = document.createElementNS("http://www.w3.org/2000/svg",'polyline');
+      last++;
+      polyline.classList.add(`c${last}`);
+      svg.appendChild(polyline);
+      pos = mousePos(svg);
+      points = `${pos.x} ${pos.y}`
+      polyline.setAttribute('points',points);
+      polyline.setAttribute('stroke',color1.value);
+      polyline.setAttribute('stroke-width',linewidth.value);
+      polyline.setAttribute('stroke-linecap','round');
+      polyline.setAttribute('stroke-linejoin','round');
+      polyline.setAttribute('fill','none');
+    }
+    else if(toolline.checked){
+      line = document.createElementNS("http://www.w3.org/2000/svg",'line');
+      last++;
+      line.classList.add(`c${last}`);
+      svg.appendChild(line);
+      pos = mousePos(svg);
+      line.setAttribute('x1',pos.x);
+      line.setAttribute('y1',pos.y);
+      line.setAttribute('x2',pos.x);
+      line.setAttribute('y2',pos.y);
+      line.setAttribute('stroke',color1.value);
+      line.setAttribute('stroke-width',linewidth.value);
+      line.setAttribute('stroke-linecap','round');
+    }
+    else if(toolcircle.checked){
+      circle = document.createElementNS("http://www.w3.org/2000/svg",'circle');
+      last++;
+      circle.classList.add(`c${last}`);
+      svg.appendChild(circle);
+      pos = mousePos(svg);
+      circle.setAttribute('stroke',color1.value);
+      circle.setAttribute('stroke-width',linewidth.value);
+      circle.setAttribute('cx',pos.x);
+      circle.setAttribute('cy',pos.y);
+      circle.setAttribute('r',0);
+      if(fill.checked){
+        circle.setAttribute('fill',color2.value);
+      }
+      else{
+        circle.setAttribute('fill',"none");
+      }
+    }
+    else if(toolqcircle.checked){
+      ellipse = document.createElementNS("http://www.w3.org/2000/svg",'ellipse');
+      last++;
+      ellipse .classList.add(`c${last}`);
+      svg.appendChild(ellipse);
+      pos = mousePos(svg);
+      prepos.x = pos.x;
+      prepos.y = pos.y;
+      ellipse .setAttribute('stroke',color1.value);
+      ellipse .setAttribute('stroke-width',linewidth.value);
+      ellipse .setAttribute('cx',pos.x);
+      ellipse .setAttribute('cy',pos.y);
+      ellipse .setAttribute('rx',0);
+      ellipse .setAttribute('ry',0);
+      if(fill.checked){
+        ellipse.setAttribute('fill',color2.value);
+      }
+      else{
+        ellipse.setAttribute('fill',"none");
+      }
+    }
+    else if(toolrec.checked){
+      rect = document.createElementNS("http://www.w3.org/2000/svg",'rect');
+      last++;
+      rect.classList.add(`c${last}`);
+      svg.appendChild(rect);
+      pos = mousePos(svg);
+      prepos.x = pos.x;
+      prepos.y = pos.y;
+      rect.setAttribute('stroke',color1.value);
+      rect.setAttribute('stroke-width',linewidth.value);
+      rect.setAttribute('x',prepos.x);
+      rect.setAttribute('y',prepos.y);
+      rect.setAttribute('width',0);
+      rect.setAttribute('height',0);
+      if(fill.checked){
+        rect.setAttribute('fill',color2.value);
+      }
+      else{
+        rect.setAttribute('fill',"none");
+      }
+    }
+    else if(tooleraser.checked){
+        polyline = document.createElementNS("http://www.w3.org/2000/svg",'polyline');
+        last++;
+        polyline.classList.add(`c${last}`);
+        svg.appendChild(polyline);
+        pos = mousePos(svg);
+        points = `${pos.x} ${pos.y}`
+        polyline.setAttribute('points',points);
+        polyline.setAttribute('stroke',"white");
+        polyline.setAttribute('stroke-width',15);
+        polyline.setAttribute('stroke-linecap','round');
+        polyline.setAttribute('stroke-linejoin','round');
+        polyline.setAttribute('fill','none');
+    }
+
+    else if(toolqline.checked){
+      flag++;
+      if(flag > 3){
+        flag = 1;
+      }
+      if(flag == 1){
+        path = document.createElementNS("http://www.w3.org/2000/svg",'path');
+        last++;
+        path.classList.add(`c${last}`);
+        svg.appendChild(path);
+        pos = mousePos(svg);
+        point1 = `${pos.x},${pos.y}`;
+        path.setAttribute('stroke',color1.value);
+        path.setAttribute('stroke-width',linewidth.value);
+        path.setAttribute('d',`M ${point1} C ${point1}  ${point1} ${point1}`);
+        path.setAttribute("fill","none");
+      }
+      else if(flag == 2){
+        pos = mousePos(svg);
+        point3 = `${pos.x},${pos.y}`;
+      }
+      else if(flag == 3){
+        pos = mousePos(svg);
+        point4 = `${pos.x},${pos.y}`;
+      }
+    }
+  })
+  svg.addEventListener("mousemove",function move(e){
+    if(e.which == 1){
+      if(toolbrush.checked){
+        pos = mousePos(svg);
+        points += ` ${pos.x} ${pos.y}`;
+        polyline.setAttribute('points',points);
+      }
+      else if(toolline.checked){
+        pos = mousePos(svg);
+        line.setAttribute('x2',pos.x);
+        line.setAttribute('y2',pos.y);
+      }
+      else if(toolcircle.checked){
+        pos = mousePos(svg);
+       let r = Math.sqrt(Math.pow((pos.x - circle.getAttribute("cx")),2) + Math.pow((pos.y - circle.getAttribute("cy")),2));
+        circle.setAttribute('r',r);
+      }
+      else if(toolqcircle.checked){
+        pos = mousePos(svg);
+        ellipse .setAttribute('cx',(prepos.x + pos.x) / 2);
+        ellipse .setAttribute('cy',(prepos.y + pos.y) / 2);
+        ellipse .setAttribute('rx',Math.abs((prepos.x - pos.x)/2));
+        ellipse .setAttribute('ry',Math.abs((prepos.y - pos.y)/2));
+      }
+      else if(toolrec.checked){
+        pos = mousePos(svg);
+        rect.setAttribute('width',Math.abs(prepos.x - pos.x));
+        rect.setAttribute('height',Math.abs(prepos.y - pos.y));
+        if((prepos.x - pos.x) > 0){
+          rect.setAttribute('x',pos.x);
+        }
+        else{
+          rect.setAttribute('x',prepos.x);
+        }
+        if((prepos.y - pos.y) > 0){
+          rect.setAttribute('y',pos.y);
+        }
+        else{
+          rect.setAttribute('y',prepos.y);
+        }
+      }
+      else if(tooleraser.checked){
+        pos = mousePos(svg);
+        points += ` ${pos.x} ${pos.y}`;
+        polyline.setAttribute('points',points);
+      }
+
+      else if(toolqline.checked){
+        if(flag == 1){
+          pos = mousePos(svg);
+          point2 = `${pos.x},${pos.y}`;
+          path.setAttribute('d',`M ${point1} C ${point2} ${point2} ${point2}`);
+        }
+        else if(flag == 2){
+          pos = mousePos(svg);
+          point3 = `${pos.x},${pos.y}`;
+          path.setAttribute('d',`M ${point1} C ${point3} ${point2} ${point2}`);
+        }
+        else if(flag == 3){
+          pos = mousePos(svg);
+          point4 = `${pos.x},${pos.y}`;
+          path.setAttribute('d',`M ${point1} C ${point3} ${point4} ${point2}`);
+        }
+      }
+    }
+  })
+
+  document.addEventListener('keydown',function(e){
+    if(e.ctrlKey && e.key == 'z' && last > 0){
+      stack.push(document.querySelector(`.c${last}`));
+      let rem = document.querySelector(`.c${last}`);
+      last--;
+      svg.removeChild(rem);
+    }
+  })
+
+  linewidth.addEventListener('input',function(){
+    widthSize.textContent = this.value;
+  })
+
+  color1.addEventListener("input",function(){
+    color1.nextElementSibling.style.color = color1.value;
+  })
+
+  color2.addEventListener("input",function(){
+    color2.nextElementSibling.style.color = color2.value;
+  })
+
+  let fill = document.querySelector("#fill");
+  fill.setAttribute("yes",0);
+  fill.addEventListener("click",function(e){
+    console.log(fill.getAttribute("yes"));
+    if(this.getAttribute("yes") == 1){
+      this.checked = false;
+      this.setAttribute("yes",0);
+    }
+    else{
+      this.setAttribute("yes",1);
+    }
+    console.log(fill.getAttribute("yes"));
+  })
+
+  let lab1 = color1.nextElementSibling;
+  let lab2 = color2.nextElementSibling;
+  lab1.setAttribute("checked",true);
+  lab2.setAttribute("checked",false);
+  lab1.style.backgroundColor = "rgb(220,237,254)";
+  lab1.addEventListener("click",function(){
+      lab1.setAttribute("checked",true);
+      lab2.setAttribute("checked",false);
+      lab1.style.backgroundColor = "rgb(220,237,254)";
+      lab2.style.backgroundColor = "transparent";
+  })
+
+  lab2.addEventListener("click",function(){
+      lab1.setAttribute("checked",false);
+      lab2.setAttribute("checked",true);
+      lab2.style.backgroundColor ="rgb(220,237,254)";
+      lab1.style.backgroundColor = "transparent";
+  })
+  let colorchose = document.querySelector("#color-chose");
+  colorchose.addEventListener("click",function(e){
+    let col = colorRGBtoHex(e.target.style.backgroundColor);
+    if(lab1.getAttribute("checked") == "true"){
+      lab1.previousElementSibling.value = col;
+      lab1.style.color = col;
+    }
+    else{
+      lab2.previousElementSibling.value = col;
+      lab2.style.color = col;
+    }
+  })
+
+  function colorRGBtoHex(color) {
+    var rgb = color.split(',');
+    var r = parseInt(rgb[0].split('(')[1]);
+    var g = parseInt(rgb[1]);
+    var b = parseInt(rgb[2].split(')')[0]);
+    var hex = "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    return hex;
+  }
+
+  let pre = document.querySelector("#pre");
+  let next = document.querySelector("#next");
+  let stack = [];
+  next.style.color = "rgb(160,175,199)";
+  pre.style.color = "rgb(160,175,199)";
+  pre.addEventListener("mouseup",function(e){
+    if(last > 0){
+      stack.push(document.querySelector(`.c${last}`));
+      svg.removeChild(document.querySelector(`.c${last}`));
+      last--;
+    }
+    pre.style.backgroundColor = "transparent";
+  })
+  next.addEventListener("mouseup",function(){
+    if(stack.length > 0){
+      last++;
+      svg.appendChild(stack.pop());
+    }
+    next.style.backgroundColor = "transparent";
+  })
+  pre.addEventListener("mousedown",function(){
+    pre.style.backgroundColor = "rgb(209,231,254)";
+  })
+
+  next.addEventListener("mousedown",function(){
+    next.style.backgroundColor = "rgb(209,231,254)";
+  })
+
+  requestAnimationFrame(function preAndNext(){
+    if(stack.length > 0){
+      next.style.color = "rgb(64,195,253)";
+    }
+    else{
+      next.style.color = "rgb(160,175,199)";
+    }
+    if(last > 0){
+      pre.style.color = "rgb(64,195,253)";
+    }
+    else{
+      pre.style.color = "rgb(160,175,199)";
+    }
+    requestAnimationFrame(preAndNext);
+  })
+
+  let save = document.querySelector("#save");
+  function beforeQuit(e) {
+    e.returnValue = "退出前请先下载文件！";
+    return e.returnValue;
+  }
+  window.addEventListener("beforeunload", beforeQuit);
+  save.addEventListener("click", function (event) {
+    let src = svg.outerHTML;
+    let blob = new Blob(["<?xml version='1.0' encoding='utf-8'?>", src],{ type: "image/xml+svg" });
+    let url = URL.createObjectURL(blob);
+    let a = document.createElement("a");
+    a.download = "Machine.svg";
+    a.href = url;
+    a.click();
+    window.removeEventListener("beforeunload",beforeQuit);
+  })
+
+  save.addEventListener("mousedown",function(){
+    save.style.fontSize = "35px";
+  })
+  save.addEventListener("mouseup",function(){
+    save.style.fontSize = "40px";
+  })
+
+  let pn = document.querySelector("#pn");
+  pn.addEventListener("mousedown",function(e){
+    e.target.style.fontSize = "35px";
+  })
+  pn.addEventListener("mouseup",function(e){
+    e.target.style.fontSize = "40px";
+  })
+
+  let draw = document.querySelector("#draw");
+  draw.addEventListener("mousedown",function(e){
+    e.target.style.fontSize = "35px";
+  })
+  draw.addEventListener("mouseup",function(e){
+    e.target.style.fontSize = "40px";
+  })
+
+  function mousePos(node){
+    let obj = node.getBoundingClientRect();
+    return {
+      x:window.event.clientX - obj.left,
+      y:window.event.clientY - obj.top,
+    }
+  }
+</script>
+</html>

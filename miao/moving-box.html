@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      background-color: rgb(26, 23, 23);
+    }
+    #box1{
+      width: 150px;
+      height: 150px;
+      position: absolute;
+      z-index: 1;
+    }
+    #box2{
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-color: #f39c12;
+      border-radius: 50%;
+    }
+    span{
+      display: block;
+      position: absolute;
+      background-color: #f1c40f;
+      width: 100%;
+      height: 50%;
+    }
+    #mouse1{
+      border-radius: 200px 200px 0 0;
+      transform-origin: 50% 100%;
+      transform: rotate(45deg);
+      animation: eat 1s linear infinite;
+    }
+    #mouse2{
+      top:50%;
+      border-radius: 0 0 200px 200px;
+      transform-origin: 50% 0%;
+      transform: rotate(-45deg);
+      animation: eat 1s linear infinite;
+    }
+    @keyframes eat{
+      50%{
+        transform: rotate(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="box1" style="left: 950px;top: 200px;">
+    <span id ="mouse1"></span>
+    <span id ="mouse2"></span>
+  </div>
+  <div id="box2" style="left: 450px;top: 250px;"></div>
+</body>
+<script>
+  let box1 = document.querySelector("#box1");
+  let box2 = document.querySelector("#box2");
+  let vx1,vx2,vy1,vy2;
+  vx1 = vx2 = vy1 = vy2 = 0;
+  let lp = rp = up = dwp = ap = dp = wp = sp = false;
+  document.addEventListener("keydown",function move(e){
+    if(e.key == "ArrowRight"){
+      if(lp){
+        vx1 = 0;
+      }
+      else{
+        vx1 = 5;
+      }
+      rp = true;
+    }
+    else if(e.key == "ArrowLeft"){
+      if(rp){
+        vx1 = 0;
+      }
+      else{
+        vx1 = -5;
+      }
+      lp = true;
+    }
+    else if(e.key == "ArrowUp"){
+      if(dwp){
+        vy1 = 0;
+      }
+      else{
+        vy1 = -5;
+      }
+      up = true;
+    }
+    else if(e.key == "ArrowDown"){
+      if(up){
+        vy1 = 0;
+      }
+      else{
+        vy1 = 5;
+      }
+      dwp = true;
+    }
+    else if(e.key == "d"){
+      if(ap){
+        vx2 = 0;
+      }
+      else{
+        vx2 = 5;
+      }
+      dp = true;
+    }
+    else if(e.key == "a"){
+      if(dp){
+        vx2 = 0;
+      }
+      else{
+        vx2 = -5;
+      }
+      ap = true;
+    }
+    else if(e.key == "w"){
+      if(sp){
+        vy2 = 0;
+      }
+      else{
+        vy2 = -5;
+      }
+      wp = true;
+    }
+    else if(e.key == "s"){
+      if(wp){
+        vy2 = 0;
+      }
+      else{
+        vy2 = 5;
+      }
+      sp = true;
+    }
+  })
+  document.addEventListener("keyup",function(e){
+    if(e.key == "ArrowRight"){
+      if(lp){
+        vx1 = -5;
+      }
+      else{
+        vx1 = 0;
+      }
+      rp = false;
+    }
+    else if(e.key == "ArrowLeft"){
+      if(rp){
+        vx1 = 5;
+      }
+      else{
+        vx1 = 0;
+      }
+      lp = false;
+    }
+    else if(e.key == "ArrowUp"){
+      if(dwp){
+        vy1 = 5;
+      }
+      else{
+        vy1 = 0;
+      }
+      up = false;
+    }
+    else if(e.key == "ArrowDown"){
+      if(up){
+        vy1 = -5;
+      }
+      else{
+        vy1 = 0;
+      }
+      dwp = false;
+    }
+    else if(e.key == "d"){
+      if(ap){
+        vx2 = -5;
+      }
+      else{
+        vx2 = 0;
+      }
+      dp = false;
+    }
+    else if(e.key == "a"){
+      if(dp){
+        vx2 = 5;
+      }
+      else{
+        vx2 = 0;
+      }
+      ap = false;
+    }
+    else if(e.key == "w"){
+      if(sp){
+        vy2 = 5;
+      }
+      else{
+        vy2 = 0;
+      }
+      wp = false;
+    }
+    else if(e.key == "s"){
+      if(wp){
+        vy2 = -5;
+      }
+      else{
+        vy2 = 0;
+      }
+      sp = false;
+    }
+  })
+
+  requestAnimationFrame(function move(){
+    box1.style.left = parseInt(box1.style.left) + vx1 + "px";
+    box1.style.top = parseInt(box1.style.top) + vy1 + "px";
+    box2.style.left = parseInt(box2.style.left) + vx2 + "px";
+    box2.style.top = parseInt(box2.style.top) + vy2 + "px";
+    if(vx1 > 0 && vy1 > 0){
+      box1.style.transform = "rotate(-135deg)"
+    }
+    else if(vx1 > 0 && vy1 < 0){
+      box1.style.transform = "rotate(135deg)"
+    }
+    else if(vx1 > 0 && vy1 == 0){
+      box1.style.transform = "rotate(180deg)"
+    }
+    else if(vx1 < 0 && vy1 < 0){
+      box1.style.transform = "rotate(45deg)"
+    }
+    else if(vx1 < 0 && vy1 > 0){
+      box1.style.transform = "rotate(-45deg)"
+    }
+    else if(vx1 < 0 && vy1 == 0){
+      box1.style.transform = "rotate(0deg)"
+    }
+    else if(vx1 == 0 && vy1 < 0){
+      box1.style.transform = "rotate(90deg)"
+    }
+    else if(vx1 == 0 && vy1 > 0){
+      box1.style.transform = "rotate(-90deg)"
+    }
+    requestAnimationFrame(move);
+  })
+</script>
+</html>
