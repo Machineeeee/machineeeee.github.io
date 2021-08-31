@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .one {
+      background-color: red;
+    }
+
+    .two {
+      background-color: yellow;
+    }
+
+    .three {
+      background-color: blue;
+    }
+
+    .dragable {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dragable one" style="left: 30px; top: 30px;"></div>
+  <div class="dragable two" style="left: 60px; top: 60px;"></div>
+  <div class="dragable three" style="left: 90px; top: 90px;"></div>
+</body>
+<script>
+  let one = document.querySelector(".one");
+  let two = document.querySelector(".two");
+  let three = document.querySelector(".three");
+  one.addEventListener("mousedown", drag);
+  two.addEventListener("mousedown", drag);
+  three.addEventListener("mousedown", drag);
+  one.addEventListener("mouseup", function () {
+    window.removeEventListener("mousemove", position);
+  })
+  two.addEventListener("mouseup", function () {
+    window.removeEventListener("mousemove", position);
+  })
+  three.addEventListener("mouseup", function () {
+    window.removeEventListener("mousemove", position);
+  })
+  function position() {
+    let left = event.clientX - l;
+    let top = event.clientY - t;
+    if(left < 50){
+      left = 0;
+    }
+    else if(left > window.innerWidth - one.offsetWidth - 50){
+      left = window.innerWidth - one.offsetWidth;
+    }
+
+    if(top < 50){
+      top = 0;
+    }
+    else if(top > window.innerHeight - one.offsetHeight - 50){
+      top = window.innerHeight - one.offsetHeight;
+    }
+
+    obj.style.left = left + "px";
+    obj.style.top = top + "px";
+  }
+  let l;
+  let t;
+  let obj;
+  let maxz = 4;
+  function drag() {
+    obj = this;
+    obj.style.zIndex = maxz++;
+    l = event.clientX - parseInt(this.style.left);
+    t = event.clientY - parseInt(this.style.top);
+    window.addEventListener("mousemove", position);
+  }
+</script>
+
+</html>

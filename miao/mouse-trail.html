@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      width: 30px;
+      height: 30px;
+      background-color: rgb(245, 6, 6);
+      border-radius: 50%;
+      position: fixed;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>点击左键增加小球数量，点击右键变换小球颜色</h1>
+  <div></div>
+  <div></div>
+  <div></div>
+</body>
+<script>
+  let item = document.querySelectorAll("div");
+  let x, y, angle;
+  let one, two, three;
+  one = 245;
+  two = 6;
+  three = 6;
+  window.addEventListener("mousemove", function () {
+    x = event.clientX;
+    y = event.clientY;
+  })
+
+  window.addEventListener("mousedown", function (event) {
+    if (event.which == 1) {
+      let div = document.createElement("div");
+      document.body.appendChild(div);
+      item = document.querySelectorAll("div");
+      console.log(2);
+    }
+    if (event.which == 3) {
+      one = one > 255 ? 0 : one + 40;
+      two = two > 255 ? 0 : two + 25;
+      three = three > 255 ? 0 : three + 20;
+      console.log(1);
+    }
+  })
+  function animation(time) {
+    angle = time * 0.005;
+    for (let key of item) {
+      key.style.left = Math.cos(angle) * 100 + x + "px";
+      key.style.top = Math.sin(angle) * 100 + y + "px";
+      angle += 2 * Math.PI / item.length;
+      key.style.backgroundColor = 'rgb(' + one + ',' + two + ',' + three + ')';
+    }
+    requestAnimationFrame(animation);
+  }
+  requestAnimationFrame(animation);
+  document.addEventListener("contextmenu", (event) => {
+    event.preventDefault();
+  })
+</script>
+
+</html>

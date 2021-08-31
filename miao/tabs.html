@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      width: 330px;
+    }
+
+    button {
+      width: 100px;
+      margin: 0;
+      position: absolute;
+      top: 0;
+    }
+
+    div {
+      margin-top: 25px;
+    }
+  </style>
+</head>
+
+<body>
+  <button style="background-color: transparent; left: 0;">Home</button>
+  <div style="display: none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet saepe voluptatibus, sapiente
+    ratione quisquam eius
+    incidunt quas officiis aspernatur aliquid, hic doloremque illo quasi unde deserunt illum laborum harum nemo.</div>
+  <button style="background-color: transparent; left: 102px">Link</button>
+  <div style="display: none;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi velit placeat neque
+    beatae quas, debitis dicta
+    exercitationem, aliquid sit voluptatum delectus, recusandae vitae sequi officia culpa? Quibusdam et assumenda
+    deserunt!
+    Hic optio omnis numquam assumenda harum voluptatem vero eaque enim atque debitis reprehenderit inventore quia,
+    explicabo et rerum cupiditate officiis praesentium, incidunt magni perferendis! Hic commodi et ducimus aliquid ipsa?
+  </div>
+  <button style="background-color: transparent; left: 204px">About</button>
+  <div style="display: none;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, voluptates possimus? Ad
+    consectetur consequatur
+    quis! Tenetur, inventore iure? Ratione eius quia ducimus amet illo cum libero tempore sint fugiat quae?
+    Laboriosam sunt natus reprehenderit deleniti suscipit totam! Voluptates repellendus sit id reiciendis dicta est
+    quasi unde reprehenderit soluta, sequi velit voluptatem illo inventore voluptate aliquid error quae. Consequuntur,
+    nulla voluptates.
+    Unde ratione officia deleniti animi laborum sit eos fugiat adipisci, velit, quo vero obcaecati nam sapiente labore
+    eveniet vel? Doloribus quidem eligendi facilis nostrum vero eaque iste ducimus neque quia.
+    Veniam veritatis quaerat consequuntur maiores odio, eos minus quam quos molestiae aut quasi vero magni inventore
+    nostrum optio laudantium laboriosam voluptatum, libero impedit commodi corrupti possimus. Voluptates harum magni in?
+  </div>
+</body>
+<script>
+  let button = Array.from(document.querySelectorAll("button"));
+  for (let key of button) {
+    key.addEventListener("click", function () {
+      for (let key of button) {
+        key.style.backgroundColor = "transparent";
+        key.nextElementSibling.style.display = "none";
+      }
+      key.style.backgroundColor = "orange";
+      key.nextElementSibling.style.display = "block";
+    })
+  }
+  button[0].click();
+</script>
+
+</html>

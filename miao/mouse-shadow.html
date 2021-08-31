@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      border: 3px solid orange;
+      position: fixed;
+    }
+  </style>
+</head>
+
+<body>
+
+</body>
+<script>
+  let x, y;
+  window.addEventListener("mousemove", function () {
+    x = event.clientX;
+    y = event.clientY;
+    let div = document.createElement("div");
+    document.body.appendChild(div);
+    div.style.left = x + "px";
+    div.style.top = y + "px";
+    setTimeout(function () {
+      document.body.removeChild(div);
+    }, 200);
+  })
+</script>
+
+</html>
