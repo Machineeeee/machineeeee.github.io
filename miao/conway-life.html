@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="https://www.bilibili.com/favicon.ico" type="image/x-icon">
+  <title>Machine's conway-life</title>
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      background-color: rgb(122, 201, 204);
+    }
+
+    input.boxs {
+      display: block;
+      padding: 0;
+      margin: 6px 3px;
+    }
+
+    main {
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #world {
+      display: flex;
+    }
+    #control{
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 10px);
+    }
+    #sizevalue{
+      margin-left: 10px;
+      margin-right: 40px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="control">
+    <input type="range" id="size" min="32" max="60" value="32"><span id="sizevalue"></span>
+    <button id="radom">随机降生</button>
+    <button id="auto">自动演化</button>
+    <button id="nextone">下一代</button>
+    <button id="clear">死寂</button>
+  </div>
+  <main>
+    <div id="world"></div>
+  </main>
+</body>
+<script>
+  let world = document.querySelector("#world");
+  let arr,flag,timeId;
+  function resetWorld() {
+    let div, box;
+    for (let i = 0; i < size.value; i++) {
+      div = document.createElement("div");
+      div.setAttribute("col", i);
+      div.classList.add("cols");
+      world.appendChild(div);
+      for (let j = 0; j < 32; j++) {
+        box = document.createElement("input");
+        box.type = "checkbox";
+        box.classList.add("boxs");
+        box.setAttribute("row", j);
+        box.setAttribute("col", i);
+        div.appendChild(box);
+      }
+    }
+    initial();
+  }
+  resetWorld();
+  size.addEventListener("change", function () {
+    world.innerHTML = "";
+    sizevalue.textContent = `32 × ${size.value}`
+    resetWorld();
+  })
+
+  sizevalue.textContent = `32 × ${size.value}`
+
+  function initial() {
+    arr = [];
+    for (let i = 0; i < 32; i++) {
+      arr.push(new Array(parseInt(size.value)).fill(0));
+      for (let j = 0; j < arr[i].length; j++) {
+        if (Math.random() > 0.8) {
+          arr[i][j] = 1;
+        }
+      }
+    }
+    reDraw();
+  }
+
+  function reDraw() {
+    for (let i = 0; i < world.childNodes.length; i++) {
+      let node = world.childNodes[i];
+      for (let j = 0; j < node.childNodes.length; j++) {
+        let n = node.childNodes[j];
+        if (arr[j][i] == 1) {
+          n.checked = true;
+        }
+        else {
+          n.checked = false;
+        }
+      }
+    }
+  }
+
+  function next() {
+    flag = true;
+    let nextArr = arr.map(a =>{
+      return a.map(b =>{
+        return b;
+      });
+    })
+    for (let i = 0; i < arr.length; i++) {
+      let t = arr[i]
+      for (let j = 0; j < t.length; j++) {
+        let one, two, three, four, five, six, seven, eight;
+        if (i == 0) {
+          one = two = three = 0;
+        }
+        else {
+          one = isNaN(arr[i - 1][j - 1]) ? 0 : arr[i - 1][j - 1];
+          two = isNaN(arr[i - 1][j]) ? 0 : arr[i - 1][j];
+          three = isNaN(arr[i - 1][j + 1]) ? 0 : arr[i - 1][j + 1];
+        }
+        if (i == 31) {
+          six = seven = eight = 0;
+        }
+        else {
+          six = isNaN(arr[i + 1][j - 1]) ? 0 : arr[i + 1][j - 1];
+          seven = isNaN(arr[i + 1][j]) ? 0 : arr[i + 1][j];
+          eight = isNaN(arr[i + 1][j + 1]) ? 0 : arr[i + 1][j + 1];
+        }
+        four = isNaN(arr[i][j - 1]) ? 0 : arr[i][j - 1];
+        five = isNaN(arr[i][j + 1]) ? 0 : arr[i][j + 1];
+        let sum = one + two + three + four + five + six + seven + eight;
+        console.log(sum,one,two,three,four,five,six,seven,eight);
+        if (sum < 2 || sum > 3) {
+          nextArr[i][j] = 0;
+        }
+        if (arr[i][j] == 1 && (sum == 2 || sum == 3)) {
+          nextArr[i][j] = 1;
+        }
+        if (arr[i][j] == 0 && sum == 3) {
+          nextArr[i][j] = 1;
+        }
+        if(arr[i][j] != nextArr[i][j]){
+          flag = false;
+        }
+      }
+    }
+    arr = nextArr;
+    reDraw();
+  }
+
+  nextone.addEventListener("click", function () {
+    next();
+  });
+
+  auto.addEventListener("click", function () {
+    next();
+    timeId = setTimeout(function go(){
+      next();
+      if(!flag){
+        timeId = setTimeout(go,200);
+      }
+    },200);
+  });
+
+  clear.addEventListener("click", function () {
+    arr = [];
+    for (let i = 0; i < 32; i++) {
+      arr.push(new Array(parseInt(size.value)).fill(0));
+    }
+    reDraw();
+  })
+  radom.addEventListener("click",function(){
+    initial();
+    clearTimeout(timeId);
+  })
+
+  world.addEventListener("click",e =>{
+    if(e.target.hasAttribute("row")){
+      let i = e.target.getAttribute("row");
+      let j = e.target.getAttribute("col");
+      if(e.target.checked){
+        arr[i][j] = 1;
+      }
+      else{
+        arr[i][j] = 0;
+      }
+    }
+  })
+  
+</script>
+
+</html>
