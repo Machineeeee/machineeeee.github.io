@@ -1,4 +1,4 @@
-var aeon_10086 = (function () {
+var machineeee = (function () {
   //将数组分块
   function chunk(ary, size = 1) {
     if (ary.length < 1) return [];
@@ -2736,5 +2736,5 @@ function DeepComparsion(obj1, obj2) {
   return true;
 }
 var objects = [1, 2, { a: 1 }, { b: [3, 4] }];
-const TESTRES = aeon_10086.cloneDeep(objects);
+const TESTRES = machineeee.cloneDeep(objects);
 console.log(TESTRES);
